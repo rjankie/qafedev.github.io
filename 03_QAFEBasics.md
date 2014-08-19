@@ -2,7 +2,7 @@
 
 ![qafelogo](http://www.qafe.com/wp-content/themes/qafe2013/img/logo.png)
 
-## 3 QAFE Basics
+## 3. QAFE Basics
 In the previous chapter the software for QAFE Development was installed. Then a simple project project was created and the QAFE HelloWorld application was shown at runtime.
 
 In this chapter we’ll dive into the anatomy of the QAFE HelloWorld Application.
