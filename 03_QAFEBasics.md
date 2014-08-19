@@ -8,35 +8,6 @@ In the previous chapter the software for QAFE Development was installed. Then a 
 In this chapter we’ll dive into the anatomy of the QAFE HelloWorld Application.
 
 
-```XML
-<presentation-tier>
-		<view>
-			<window id="helloWorld" displayname="Hello World" width="300" height="250">
-				<rootpanel id="rootPanelId">
-					<verticallayout>
-						<button id="clickMeButtonId" displayname="Click me"/>
-					</verticallayout>
-				</rootpanel>  
-				<events>
-					<event id="clickMeEventId">
-						<listeners>
-							<listenergroup>
-								<component ref="clickMeButtonId"/>  
-								<listener type="onclick"/>
-							</listenergroup>
-						</listeners>  
-						<dialog type="info">
-							<title value="Hello Dialog"/>  
-							<message value="Hello World!"/>
-						</dialog>
-					</event>
-				</events>
-			</window>
-		</view>
-	</presentation-tier>  
-
-
-```
 
 
 ```XML
