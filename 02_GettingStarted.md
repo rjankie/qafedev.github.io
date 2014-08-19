@@ -59,7 +59,7 @@ Start creation of QAML Project by following the steps:
 
 1. Before running your QAML application, you’ll need to build your application. This will create a directory with an assembly of your QAML application in QAFE Platform as well as a war which can be deployed on your server. To build your newly created QAML Project, Right Click on the project `qafe-demo`  > Choose `QAFE` and then `Build QAFE Application` as shown below.(After successful build, if you don’t see the target directory, do a refresh on the project)
 
-> SHOW NEW POPUP
+![buildqafeapp](https://raw.githubusercontent.com/qafedev/qafedev.github.io/master/assets/images/buildqafeapp.png)
 
 1. The QAML Builder plug-in also offers an option to run and test your application inside eclipse on a Jetty server.To run the project Right click on `qafe-demo` > Choose `Run As` -> Choose `QAFE Application` as shown below
 
