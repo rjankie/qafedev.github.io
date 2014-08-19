@@ -63,7 +63,7 @@ Start creation of QAML Project by following the steps:
 
 1. The QAML Builder plug-in also offers an option to run and test your application inside eclipse on a Jetty server.To run the project Right click on `qafe-demo` > Choose `Run As` -> Choose `QAFE Application` as shown below
 
-> SHOW NEW POPUP
+![runqafeapp](https://raw.githubusercontent.com/qafedev/qafedev.github.io/master/assets/images/runqafeapp.png)
 
 1. Now an instance of Jetty server is started with your QAML application assembly deployed on it. Default browser of your machine will be invoked with QAFE Application. You can also use `http://localhost:7070/qafe-demo/QAFEGWTWeb.jsp` and open QAFE Application in other browsers.
 1. In the QAFE Application on browser under  Programs menu (upper left) you can see the qafe-demo through which is it possible to invoke the Hello World Qafe Application defined in `helloworld.qaml`
