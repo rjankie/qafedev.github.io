@@ -48,6 +48,7 @@ Start creation of QAML Project by following the steps:
 1. Choose from the menu  `File -> New -> QAFE Project`. A wizard will popup
 
 ![newproject](https://raw.githubusercontent.com/qafedev/qafedev.github.io/master/assets/images/newqafeproject.png)
+
 1. Enter the name of your QAFE project and the name of your application (in this case `qafe-demo`)
 1. The path to QAFE should point to the extracted version of QAFE Platform as mentioned above. The QAFE Platform is installed in the `<USER_HOME>/qafe` folder.
 1. Click Finish to create the new QAFE Project.
@@ -61,9 +62,11 @@ Start creation of QAML Project by following the steps:
 
 ![buildqafeapp](https://raw.githubusercontent.com/qafedev/qafedev.github.io/master/assets/images/buildqafeapp.png)
 
+
 1. The QAML Builder plug-in also offers an option to run and test your application inside eclipse on a Jetty server.To run the project Right click on `qafe-demo` > Choose `Run As` -> Choose `QAFE Application` as shown below
 
 ![runqafeapp](https://raw.githubusercontent.com/qafedev/qafedev.github.io/master/assets/images/runqafeapp.png)
+
 
 1. Now an instance of Jetty server is started with your QAML application assembly deployed on it. Default browser of your machine will be invoked with QAFE Application. You can also use `http://localhost:7070/qafe-demo/QAFEGWTWeb.jsp` and open QAFE Application in other browsers.
 1. In the QAFE Application on browser under  Programs menu (upper left) you can see the qafe-demo through which is it possible to invoke the Hello World Qafe Application defined in `helloworld.qaml`
