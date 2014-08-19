@@ -5,7 +5,7 @@
 ## 1. Introduction: QAFE Core Platform
 
 ### 1.1 What is QAFE?
-QAFE is a product from [Qualogy Consultancy B.V](http://www.qualogy.com) and is an acronym for "Quality Application Framework for Enterprises".
+QAFE is a product from [Qualogy Solutions B.V](http://www.qualogy.com) and is an acronym for "Quality Application Framework for Enterprises".
 
 ![qualogylogo](assets/images/q_logo.png)
 
