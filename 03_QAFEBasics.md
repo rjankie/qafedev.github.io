@@ -60,10 +60,3 @@ Example:
 </application>
 
 ```
-To test the QAFE applications, start Apache tomcat by running the startup.bat file in the bin directory. Open a web browser and type the following in the URL bar:
-
-http://localhost:9080/<context root>
-
-> - localhost: server name
-- 9080: server port (configured above)
-- context root: “qafe-web-gwt”
