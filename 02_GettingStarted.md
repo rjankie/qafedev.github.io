@@ -47,7 +47,7 @@ Start creation of QAML Project by following the steps:
 
 1. Choose from the menu  `File -> New -> QAFE Project`. A wizard will popup
 
-[newproject](https://raw.githubusercontent.com/qafedev/qafedev.github.io/master/assets/images/newqafeproject.png)
+![newproject](https://raw.githubusercontent.com/qafedev/qafedev.github.io/master/assets/images/newqafeproject.png)
 1. Enter the name of your QAFE project and the name of your application (in this case `qafe-demo`)
 1. The path to QAFE should point to the extracted version of QAFE Platform as mentioned above. The QAFE Platform is installed in the `<USER_HOME>/qafe` folder.
 1. Click Finish to create the new QAFE Project.
