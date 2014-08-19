@@ -61,7 +61,7 @@ Start creation of QAML Project by following the steps:
 
 > SHOW NEW POPUP
 
-1. The QAML Builder plug-in also offers an option to run and test your application inside eclipse on a Jetty server.To run the project Right click on `SimpleQamlProject` > Choose `Run As` -> Choose `QAFE Application` as shown below
+1. The QAML Builder plug-in also offers an option to run and test your application inside eclipse on a Jetty server.To run the project Right click on `qafe-demo` > Choose `Run As` -> Choose `QAFE Application` as shown below
 
 > SHOW NEW POPUP
 
