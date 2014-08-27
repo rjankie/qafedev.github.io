@@ -1,14 +1,18 @@
-# 5. Writing a Web Application
+#QAFE Book
 
-## 5.1. Overview
+![qafelogo](assets/images/logo.png)
 
-## 5.2. Managing the Main Window
+## 5. Writing a Web Application
 
-## 5.3. Sub-Windows
+### 5.1. Overview
 
-## 5.4. Handling Events with Listeners
+### 5.2. Managing the Main Window
 
-## 5.2 Events
+### 5.3. Sub-Windows
+
+### 5.4. Handling Events with Listeners
+
+### 5.2 Events
 
 ##### 5.2.1 Listeners/Listener Groups
 
