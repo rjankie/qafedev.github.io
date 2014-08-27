@@ -1,9 +1,8 @@
 ### QAFE Developer Documentation
 
-* [Introduction](01_Introduction.md)
+* [Introduction and Architecture](01_Introduction.md)
 * [Getting started](02_GettingStarted.md)
 * [QAFE Basics](03_QAFEBasics.md)
-* [Architecture](04_Architecture.md)
 * [Writing Web Applications](05_WritingWebApplications.md)
 * [User Interface Components](06_UserInterfaceComponents.md)
 * [Managing Layout](07_ManagingLayout.md)
