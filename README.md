@@ -11,7 +11,7 @@
 * [QAFE Database Resource](10_QAFEDatabaseResource.md)
 * [Advanced Web Application Topics](11_AdvancedWebApplicationTopics.md)
 * [Rapid Application Development Using QOCA](12_RapidApplicationDevelopmentUsingQOCA.md)
-* [QAFE Add-ons](13_QAFEAddOns.md)
+
 
 
 For References QAML, checkout the following:
