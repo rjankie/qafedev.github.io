@@ -5,7 +5,35 @@
 
 ## 4 Adding events your applications
 
-Events are used in order to associate actions to components. All the events that need to be defined are included in the *<events>* tag in QAML file. An event that can be defined within the*<event> *tag can have the following attributes.
+Events are used in order to associate actions to components. All the events that need to be defined are included in the *events* tag in QAML file. An event that can be defined within the*<event> *tag can have the following attributes.
+
+> There are **global** and **local** events. We focus now on local events. Local to the window that is.
+
+```XML
+<application-mapping>
+   <presentation-tier>
+     <view>
+      <window id="myWindow" displayname="Hello World">
+        <rootpanel>
+          <verticallayout>
+            <button id="myButton" displayname="HellWorld"/>
+          </verticallayout>
+        </rootpanel>
+      </window>
+      <events>
+        <event id=*"myEventId"*>
+              <listeners>
+                    <listenergroup>
+                          <component ref=*"myComponentId"* />
+                          <listener type=*"onclick"* />
+                    </listenergroup>
+              </listeners>
+              <!-- built in function declarations will go here -->
+        </event>
+    </view>
+  </presentation-tier>
+</application-mapping>
+```
 
 <table>
   <tr>
@@ -38,40 +66,26 @@ Events are used in order to associate actions to components. All the events that
 The attributes described above are optional for*<event></event> *tag.
 
 Example Code:
-
+```XML
 <events>
-
 	<event id=*"myEventId"* src-id=*"idVar"* src-name=*"nameVar"* src-value=*"valueVar" 	*
-
-*				  src-listener-type**=**"listenerTypeVar"*>
-
+         src-listener-type**=**"listenerTypeVar"*>
 	      <listeners>
-
 	            <listenergroup>
-
 	                  <component ref=*"myComponentId"* />
-
-                       <listener type=*"onclick"* />
-
+                    <listener type=*"onclick"* />
 	            </listenergroup>
-
 	      </listeners>          
-
-		  <dialog type=*"info" *>
-
+		    <dialog type=*"info" *>
           	<title value=*"My Title"* />
-
               <message value=*"${idVar}+${nameVar}+${valueVar}+${listenerTypeVar}"*>
-
               </message>
-
 	      </dialog>
-
 	</event>
-
 </events>
+```
 
-The *<event> *tag must have *<listeners> *tag which holds the listener groups associated with that event. The components which needs to trigger that event is referenced in the *<listenergroup> *tag inside the listeners. Multiple components can refer to a single listener. The <listener> designates the type of action that triggers the associated event. A  listeners element can have more than one listener groups. The type of actions that a listener can handle are shown in the table below.
+The *event* tag must have *listeners* tag which holds the listener groups associated with that event. The components which needs to trigger that event is referenced in the *<listenergroup> *tag inside the listeners. Multiple components can refer to a single listener. The <listener> designates the type of action that triggers the associated event. A  listeners element can have more than one listener groups. The type of actions that a listener can handle are shown in the table below.
 
 <table>
   <tr>
@@ -145,7 +159,7 @@ The *<event> *tag must have *<listeners> *tag which holds the listener groups a
   <tr>
     <td>ontimer</td>
     <td>
-When the ontimer is slected, the event will be triggered when the time-out parameter, specified in milliseconds, is reached.
+When the ontimer is selected, the event will be triggered when the time-out parameter, specified in milliseconds, is reached.
 Additional listener parameters can be added to control the behaviour
 by adding the following elements in the body of the listener:
 
@@ -175,99 +189,26 @@ execute the event when this parameter is reached, for example:
 
 Supported keys (non-printable chars) for onkeydown and onkeyup:
 
-- *F1*
-
-- *F2*
-
-- *F3*
-
-- *F4*
-
-- *F5*
-
-- *F6*
-
-- *F7*
-
-- *F8*
-
-- *F9*
-
-- *F10*
-
-- *F11*
-
-- *F12*
-
-- *KEY_SPACE*
-
-- *KEY_INSERT*
-
-- *KEY_DELETE*
-
-- *KEY_HOME*
-
-- *KEY_END*
-
-- *KEY_PAGEUP*
-
-- *KEY_PAGEDOWN*
-
-- *KEY_UP*
-
-- *KEY_DOWN*
-
-- *KEY_LEFT*
-
-- *KEY_RIGHT*
-
-- *KEY_BACKSPACE*
-
-- *KEY_ENTER*
-
-- *KEY_ESCAPE*
-
-- *KEY_TAB*
-
-- *KEY_NUMLOCK*
-
+- *F1, F2, F3,F4,F5,F6,F7,F8,F9,F10,F11,F12*
+- *KEY_SPACE,KEY_INSERT,KEY_DELETE,KEY_HOME,KEY_END,KEY_PAGEUP,KEY_PAGEDOWN,KEY_UP,KEY_DOWN,KEY_LEFT,KEY_RIGHT,KEY_BACKSPACE,KEY_ENTER,KEY_ESCAPE,KEY_TAB,KEY_NUMLOCK*
 - *KEY_ALT* (can be used in combination with another key, like *KEY_ALT + A*)
-
 - *KEY_CTRL* (can be used in combination with another key, like *KEY_CTRL + F2*)  
-
 - *KEY_SHIFT* (can be used in combination with another key, like *KEY_SHIFT + KEY_LEFT*)  
 
 Example Code:
-
+```XML
 <events>
-
 	<event id=*"myEventId"*>
-
 	      <listeners>
-
 	            <listenergroup>
-
 	                  <component ref=*"myComponentId"* />
-
-	                  .
-
-	                  .
-
 	                  <listener type=*"onclick"* />
-
 	            </listenergroup>
-
 	      </listeners>
-
 	      <!-- built in function declarations will go here -->
-
 	</event>
-
-	.
-
-	.
-
 </events>
+```
 
 ##### 5.2.2 Built-Ins
 
