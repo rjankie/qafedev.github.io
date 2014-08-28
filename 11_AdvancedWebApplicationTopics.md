@@ -1,19 +1,22 @@
+#QAFE Book
 
-# 11. Advanced Web Application Topics
+![qafelogo](http://www.qafe.com/wp-content/themes/qafe2013/img/logo.png)
 
-## Advanced configuration
+## 10. Advanced Web Application Topics
 
-### Merging of XML files
+### Advanced configuration
+
+#### Merging of XML files
 
 Maintainability of one big QAML file or more than one developers working on the same application, one person developing presentation tiers, another person developing business tier can demand the scenario where a single QAML application need to be split to different files. In such case the contents of each file will start with <application-mapping> tag as shown below.
 
-*`<?xml version="1.0" encoding="UTF-8"?*>`
+```XML
+<?xml version="1.0" encoding="UTF-8"?*>
 
-`<application-mapping xmlns="http://qafe.com/schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://qafe.com/schema http://www.qafe.com/schema/application-mapping.xsd">`
-
-`	<!-- add the tiers here -->`
-
-`</application-mapping>`
+<application-mapping xmlns="http://qafe.com/schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://qafe.com/schema http://www.qafe.com/schema/application-mapping.xsd">
+	<!-- add the tiers here -->
+</application-mapping>
+```
 
 At runtime the files are merged and considered as one application.
 
@@ -23,7 +26,7 @@ There are several ways of passing parameters to a QAFE application:
 
 * For an external web application via URL parameters.
 
-If parameters are passed through URL then while invoking QAFE all the parameters are automatically stored in the DataStore and will be available for every event in QAFE application. Use $PARAMETER.<parameterName> to access the parameter.
+If parameters are passed through URL then while invoking QAFE all the parameters are automatically stored in the DataStore and will be available for every event in QAFE application. Use ``$PARAMETER.<parameterName>`` to access the parameter.
 
 * Between windows of the same application (in MDI mode).
 
@@ -37,7 +40,7 @@ QAFE can be configured in two ways, on *application-context level* and *applica
 
 * application level: setting the properties in the application-context mapping file.
 
-* global level: setting the properties on applications configuration tag 'QAFE.xml.validation' 
+* global level: setting the properties on applications configuration tag `qafe.xml.validation` 
 
 * property : when reading the context file the global property will be used where all other mapping files will use the application configured property. 
 
@@ -102,13 +105,13 @@ Gson library is used to serialise and send data to and fro.
 
 Following steps sets the server part for web services:
 
-* Deploy webservice-businessaction-server-<version>.war. After successful deployment, the wsdl can be accessed and checked using the url 
+* Deploy webservice-businessaction-server-<version>.war. After successful deployment, the wsdl can be accessed and checked using the url
 
-**http://**<domain>**/webservice-businessaction-server-**<version>**/services/BusinessactionWebservice?wsdl**
+``http://<domain>/webservice-businessaction-server-<version>/services/BusinessactionWebservice?wsdl``
 
 * The qaml files with the business-actions and statements files (if any) should be placed inside the deployed webservice-businessaction-server-<version>\WEB-INF folder.
 
-* Jar files with java classes if being used as resources can be added into the lib folder with in the WEB-INF directory. 
+* Jar files with java classes if being used as resources can be added into the lib folder with in the WEB-INF directory.
 
 Restarting the server may be needed depending on the configuration of the same.After successfully performing the above mentioned steps, web service server part will be ready and can provide access to business actions in the qaml files.
 
@@ -116,225 +119,168 @@ Following code snippets can be referred to understand how to make call to the bu
 
 Consider that following is the content of qaml file inside the WEB-INF directory of deployed business action web service.
 
-`<business-tier>`
+```XML
+<business-tier>
+	<business-actions>
+    <business-action id="randomNextLong">
+   	  <transaction managed="no" />  
+       	<service ref="Random" method-ref="nextLong">
+          	<out name="nextLongOut0" ref="nextLongOut0" />
+        </service>
+    </business-action>
 
-`  	<business-actions>`
+    <business-action id="dummyBA">
+     	<transaction managed="no" />  
+         	 <service ref="Dummy" method-ref="dummyMethod">
+            	 <in name="str1" ref="str1"/>
+               <in name="str2" ref="str2"/>
+              <out name="result" ref="resultFromBA"/>
+            </service>
+    </business-action>
 
-`  	  	<business-action id="randomNextLong">`
+  	<business-action id="exposeSuperHuman">
+  	        	<transaction managed="no" />
+  	        	<service ref="Dummy" method-ref="exposeSuperHuman">
+  	              	<in name="superHuman" ref="superHuman"/>
+  	              	<out name="realHuman" ref="exposedSH"/>
+  	        	</service>
+  	</business-action>
 
-`  	        	<transaction managed="no" />`
+  </business-actions>
+</business-tier>
 
-`  	        	<service ref="Random" method-ref="nextLong">`
 
-`  	              	<out name="nextLongOut0" ref="nextLongOut0" />`
 
-`  	        	</service>`
+<integration-tier>
+  	<services>
+        	<service id="Random" resource-ref="RandomResource">
+              	<method id="nextLong">
+                    	<out name="nextLongOut0" />
+              	</method>
+        	</service>
 
-`  	  	</business-action>`
+        	<service id="Dummy" resource-ref="DummyResource">
+              	<method id="dummyMethod">
+                    	<in name="0" ref="str1"/>
+                    	<in name="1" ref="str2"/>
+                    	<out name="resultFromBA" />
+              	</method>
+              	<method id="exposeSuperHuman">
+                   <in name="0" ref="superHuman" class="com.qualogy.qafe.webservice.businessaction.SuperHuman"/*>
+<out name="exposedSH" class="com.qualogy.qafe.webservice.businessaction.Human"/*>
 
-`  	  	<business-action id="dummyBA">`
+              	</method>
+        	</service>
+  	</services>
+</integration-tier>
 
-`  	        	<transaction managed="no" />`
 
-`  	        	<service ref="Dummy" method-ref="dummyMethod">`
 
-`  	              	<in name="str1" ref="str1"/>`
-
-`  	              	<in name="str2" ref="str2"/>`
-
-`  	              	<out name="result" ref="resultFromBA"/>`
-
-`  	        	</service>`
-
-`  	  	</business-action>`
-
-`  	  	<business-action id="exposeSuperHuman">`
-
-`  	        	<transaction managed="no" />`
-
-`  	        	<service ref="Dummy" method-ref="exposeSuperHuman">`
-
-`  	              	<in name="superHuman" ref="superHuman"/>`
-
-`  	              	<out name="realHuman" ref="exposedSH"/>`
-
-`  	        	</service>`
-
-`  	  	</business-action>`
-
-`  	</business-actions>`
-
-`</business-tier>`
-
-`  	`
-
-`<integration-tier>`
-
-`  	<services>`
-
-`        	<service id="Random" resource-ref="RandomResource">`
-
-`              	<method id="nextLong">`
-
-`                    	<out name="nextLongOut0" />`
-
-`              	</method>`
-
-`        	</service>`
-
-`        	<service id="Dummy" resource-ref="DummyResource">`
-
-`              	<method id="dummyMethod">`
-
-`                    	<in name="0" ref="str1"/>`
-
-`                    	<in name="1" ref="str2"/>`
-
-`                    	<out name="resultFromBA" />`
-
-`              	</method>`
-
-`              	<method id="exposeSuperHuman">`
-
-`<in name="0" ref="superHuman"`
-
-`class="com.qualogy.qafe.webservice.businessactio`
-
-*`n.SuperHuman"/*>`
-
-`<out name="exposedSH"`
-
-`class="com.qualogy.qafe.webservice.businessactio`
-
-*`n.Human"/*>`
-
-`              	</method>`
-
-`        	</service>`
-
-`  	</services>`
-
-`</integration-tier>`
-
-` `
-
-`<resource-tier>`
-
-`  	<resources>`
-
-`        	<javaclass id="RandomResource" classname="java.util.Random" />`
-
-`      	<javaclass id="DummyResource" `
-
-`classname="com.qualogy.qafe.webservice.businessaction.DummyC`
-
-*`lass" /*>`
-
-`  	</resources>`
-
-`</resource-tier>`
+<resource-tier>
+  	<resources>
+        	<javaclass id="RandomResource" classname="java.util.Random" />
+      	<javaclass id="DummyResource" classname="com.qualogy.qafe.webservice.businessaction.DummyClass" /*>
+  	</resources>
+</resource-tier>
+```
 
 In order to execute the above mentioned business actions, call from java class will be made as shown below
 
-`class BusinessactionWebserviceCall{`
+```java
+class BusinessactionWebserviceCall{
 
-`  	`
+private Map<String, Object> businessactionInputs;
 
-`private Map<String, Object> businessactionInputs;`
+private Map<String, Object> output;
 
-`private Map<String, Object> output;`
+private String businessactionName;
 
-`private String businessactionName;`
+private String applicationId;
 
-`private String applicationId;`
+// Method calling the randomNextLong business action
 
-`  `
+public void callRandomNextLongBA(){
 
-`// Method calling the randomNextLong business action`
+  	BusinessactionServiceClient businessactionServiceClient = new BusinessactionServiceClient("http://<domain>/webservice-businessaction-server-<version>");
 
-`public void callRandomNextLongBA(){`
+  	businessactionName = "randomNextLong";
 
-`  	BusinessactionServiceClient businessactionServiceClient = new BusinessactionServiceClient("http://<domain>/webservice-businessaction-server-<version>");`
+  	applicationId = "myApplicationId";
 
-`  	businessactionName = "randomNextLong";`
+  	// No inputs for business action
 
-`  	applicationId = "myApplicationId";`
+  	output = businessactionServiceClient.executeBusinessactionAsWebservice(applicationId, businessactionName, businessactionInputs);
 
-`  	// No inputs for business action`
+System.out.println("Randon number output from Businessaction invoked as Webservice is: "+output.get("nextLongOut0"));
 
-`  	output = businessactionServiceClient.executeBusinessactionAsWebservice(applicationId, businessactionName, businessactionInputs);`
+  	}
 
-`System.out.println("Randon number output from Businessaction invoked as Webservice is: "+output.get("nextLongOut0"));`
 
-`  	}`
+// Method calling the dummyBA business action
 
-`  	`
+public void allDummyBA(){
 
-`// Method calling the dummyBA business action`
+  	BusinessactionServiceClient businessactionServiceClient = new BusinessactionServiceClient("http://<domain>/webservice-businessaction-server-<version>");
 
-`public void allDummyBA(){`
+  	businessactionName = "dummyBA";
 
-`  	BusinessactionServiceClient businessactionServiceClient = new BusinessactionServiceClient("http://<domain>/webservice-businessaction-server-<version>");`
+  	applicationId = "myApplicationId";
 
-`  	businessactionName = "dummyBA";`
+  	businessactionInputs = new HashMap<String, Object>();
 
-`  	applicationId = "myApplicationId";`
+  	businessactionInputs.put("str1", "4AsKEY");
 
-`  	businessactionInputs = new HashMap<String, Object>();`
+  	businessactionInputs.put("str2", "fourAsValue");
 
-`  	businessactionInputs.put("str1", "4AsKEY");`
+  	output = businessactionServiceClient.executeBusinessactionAsWebservice(applicationId, businessactionName, businessactionInputs);
 
-`  	businessactionInputs.put("str2", "fourAsValue");`
+System.out.println((HashMap) output.get("result")).get("4AsKEY"));
 
-`  	output = businessactionServiceClient.executeBusinessactionAsWebservice(applicationId, businessactionName, businessactionInputs);`
+  	}
 
-`System.out.println((HashMap) output.get("result")).get("4AsKEY"));`
 
-`  	}`
 
-`  	`
+// Method calling the exposeSuperHuman business action
 
-`// Method calling the exposeSuperHuman business action`
+public void callExposeSuperHumanBA(){
 
-`public void callExposeSuperHumanBA(){`
+  	BusinessactionServiceClient businessactionServiceClient = new BusinessactionServiceClient("http://<domain>/webservice-businessaction-server-<version>");
 
-`  	BusinessactionServiceClient businessactionServiceClient = new BusinessactionServiceClient("http://<domain>/webservice-businessaction-server-<version>");`
+  	businessactionName = "exposeSuperHuman";
 
-`  	businessactionName = "exposeSuperHuman";`
+  	applicationId = "myApplicationId";
 
-`  	applicationId = "myApplicationId";`
+  	businessactionInputs = new HashMap<String, Object>();
 
-`  	businessactionInputs = new HashMap<String, Object>();`
+  	SuperHuman sh1 = new SuperHuman("Superman", "Can Fly");
 
-`  	SuperHuman sh1 = new SuperHuman("Superman", "Can Fly");`
+  	businessactionInputs.put("superHuman", sh1);
 
-`  	businessactionInputs.put("superHuman", sh1);`
+ 	output = businessactionServiceClient.executeBusinessactionAsWebservice(applicationId, businessactionName, businessactionInputs);
 
-`  	output = businessactionServiceClient.executeBusinessactionAsWebservice(applicationId, businessactionName, businessactionInputs);`
+  HashMap h1 = (HashMap)output.get("realHuman");
 
-`HashMap h1 = (HashMap)output.get("realHuman"); `
+}
 
-`}`
-
-`}`
-
+}
+```
 If the resource used is a java class, after executing business action, we get a simple data type or a map or a list of map depending on the return type of the method called in the java class.For a data base used as a resource, the result of the business action will be a list of maps
 
-## VPD usage in Qafe application
+## VPD usage in QFE application
 
  
 
-This article is intended for Qafe developers who want to use a VPD enabled oracle database in his/her resource-tier of qafe application.
+This article is intended for QAFE developers who want to use a VPD enabled oracle database in his/her resource-tier of qafe application.
 
  
 
-The Virtual Private Database(VPD) enables data access control by user or by customer with the assurance of physical data separation. Qafe support making connection to the database to use Oracle VPD capability.
+The Virtual Private Database(VPD) enables data access control by user or by customer with the assurance of physical data separation. QAFE supports making connection to the database to use Oracle VPD capability.
 
 We try to explain how to talk with a VPD enabled oracle database with using some code snippets.
 
  
 
-The impact to add the VPD ability to Qafe application is too little. Here are steps to follow:
+The impact to add the VPD ability to QAFE application is too little. Here are steps to follow:
 
  
 
@@ -346,7 +292,7 @@ The impact to add the VPD ability to Qafe application is too little. Here are st
 
 Leave everything as it is except the value for user name of  user connecting to the database. Change it to the name of proxy user. Changing user name can also be done in application runtime.
 
-2-    Add the created datastore to the one of event in presentation-tier. It’s up to Qafe application developer to find an appropriate event to put the created datastore.
+2-    Add the created datastore to the one of event in presentation-tier. It’s up to QAFE application developer to find an appropriate event to put the created datastore.
 
 3-    Go to resource-tier in your created qafe application. Go to the datasource which you want to use to connect to the VPD enabled database. Add the property "proxy-connection" with value “true”. You get something like:
 
@@ -369,61 +315,48 @@ Note: the user name used in datasource to connect to database could be different
 ### Jetty
 
 1.    Pick up "qafe-web-gwt.war" file.
-
 2.    Go to` /WEB-INF` directory.
-
 3.    Open "`jetty-web.xml`" file.
-
 4.    You can change the JNDI name and database properties in this file.
-
 5.    Save the file if you are finished with changes.
-
 6.    You done!!!
 
  
 
-Remember you have to use "jndi-datasource" element in your Qafe application’s resourse-tier.
+Remember you have to use "jndi-datasource" element in your QAFE application’s resourse-tier.
 
  
 
-Before using JNDI in your Qafe application you can specify the database connection like this:
+Before using JNDI in your QAFE application you can specify the database connection like this:
 
  
-
-`  <resource-tier>`
-
-`    <resources>`
-
-`      <drivermanager-datasource id="ModuleDataBaseService" statements-file-`
-
-`url="hsd0004f.fmb-statements.xml"`
-
-`url="jdbc:oracle:thin:@192.168.130.205:1521:XE" username="hdemo65"`
-
-`password="hdemo65" driver-classname="oracle.jdbc.OracleDriver"/>`
-
-`    </resources>`
-
-`  </resource-tier>`
-
+```XML
+  <resource-tier>
+    <resources>
+      <drivermanager-datasource id="ModuleDataBaseService"
+            statements-file-url="hsd0004f.fmb-statements.xml"
+            url="jdbc:oracle:thin:@192.168.130.205:1521:XE"
+            username="hdemo65"
+            password="hdemo65"
+            driver-classname="oracle.jdbc.OracleDriver"/>
+    </resources>
+  </resource-tier>
+```
  
 
-    By using JNDI your database connection looks like this:
+By using JNDI your database connection looks like this:
 
- 
+```XML
+  <resource-tier>`
 
-`  <resource-tier>`
+    <resources>`
 
-`    <resources>`
-
-`      <jndi-datasource id="ModuleDataBaseService" statements-file-`
-
-`url="hsd0004f.fmb-statements.xml" jndiname="jdbc/oracleQafe"/>`
-
-`    </resources>`
-
-`  </resource-tier>`
-
+      <jndi-datasource id="ModuleDataBaseService"
+        statements-file-url="hsd0004f.fmb-statements.xml"
+        jndiname="jdbc/oracleQAFE"/>
+    </resources>
+  </resource-tier>
+```
  
 
 ### Tomcat
@@ -446,15 +379,15 @@ Before using JNDI in your Qafe application you can specify the database connecti
 
  
 
- 
-
 ## Search operators usage
 
-Using select statements for searching records in the database has been enhanced. Now is also possible to pass value which contains operators to select statement and it will be translated into proper sql statement. This possibility can only be applied to the select statement which contains "table" attribute. For example: 
+Using select statements for searching records in the database has been enhanced. Now is also possible to pass value which contains operators to select statement and it will be translated into proper sql statement. This possibility can only be applied to the select statement which contains "table" attribute. For example:
 
-`  <select id="id" table="table_name"/>`
+```XML
+  <select id="id" table="table_name"/>
+```
 
-All the supported operators and usage has been list below. 
+All the supported operators and usage has been list below.
 
 <table>
   <tr>
@@ -538,198 +471,3 @@ All the supported operators and usage has been list below.
     <td>select * from table_name where x like ‘s_lar’</td>
   </tr>
 </table>
-
-
-##  Running applications
-
-### Certification matrix for servers
-
-It is possible to run QAFE in any application server that meets the servlet specifications v2.3 and runs on JDK v1.5 or higher. The comparative matrix for the most common web and application servers are as shown below.
-
-<table>
-  <tr>
-    <td>Application Server</td>
-    <td>Version</td>
-    <td>Vendor</td>
-    <td>JEE compatibility</td>
-    <td>Servlet specification</td>
-  </tr>
-  <tr>
-    <td>Apache Tomcat</td>
-    <td>5.5.28</td>
-    <td>Apache Software Foundation</td>
-    <td>NO</td>
-    <td>2.4</td>
-  </tr>
-  <tr>
-    <td>Jetty</td>
-    <td>6.1.22</td>
-    <td>Mort Bay Consulting</td>
-    <td>NO</td>
-    <td>2.5</td>
-  </tr>
-  <tr>
-    <td>JBoss Application Server</td>
-    <td>5.1.0.GA</td>
-    <td>RedHat</td>
-    <td>5</td>
-    <td>2.5</td>
-  </tr>
-  <tr>
-    <td>WebLogic Server</td>
-    <td>10gR3 (10.3)</td>
-    <td>Oracle Corporation</td>
-    <td>5</td>
-    <td>2.5</td>
-  </tr>
-  <tr>
-    <td>OC4J</td>
-    <td>10.1.3.5.0</td>
-    <td>Oracle Corporation</td>
-    <td>5</td>
-    <td>2.4</td>
-  </tr>
-  <tr>
-    <td>WebSphere AS Community Edition</td>
-    <td>2.1.1.3</td>
-    <td>IBM</td>
-    <td>5</td>
-    <td>2.5</td>
-  </tr>
-  <tr>
-    <td>GlassFish</td>
-    <td>2.1.1</td>
-    <td>Sun Microsystems</td>
-    <td>5</td>
-    <td>2.5</td>
-  </tr>
-</table>
-
-
-All these servers are certified for running QAFE applications.
-
-Recommendations:
-
-* Use the last version of the server (if it can run on JDK1.5 or higher)
-
-* Webserver for QAFE  is preferred to be Tomcat or Jetty as they are much lighter than application servers.
-
-* Application server for QAFE is preferred to be GlassFish.
-
-* Use the standard SUN Java Virtual Machine.
-
-### Running a QAML 'Hello world!' application
-
-For running a QAML 'Hello world!' application following components are needed:
-
-1. A server (see the 'Certification matrix' section above)
-
-1. QAFE installed (see the 'Installation' chapter)
-
-1. A QAML application
-
-For the following description it is assumed that QAFE has been successfully installed on a server and basic concepts of QAML have been understood. 
-
-The QAML code of the 'Hello world!':
-
-*`<?xml version="1.0" encoding="UTF-8"?*>`
-
-`<application-mapping xmlns="http://qafe.com/schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://qafe.com/schema http://www.qafe.com/schema/application-mapping.xsd">`
-
-`<presentation-tier>`
-
-`<view>`
-
-`<window id="myWindow" displayname="Hello world example">`
-
-`<rootpanel id="myRootPanel">`
-
-`<verticallayout>`
-
-`<textfield id="input">`
-
-`<value></value>`
-
-`</textfield>`
-
-`<button id="mybutton" displayname="Click here"/>`
-
-`</verticallayout>`
-
-`</rootpanel>`
-
-`<events>`
-
-`<event id="evt">`
-
-`<listeners>`
-
-`<listenergroup>`
-
-`<component ref="mybutton"/>`
-
-`<listener type="onclick"/>`
-
-`</listenergroup>`
-
-`</listeners>`
-
-`<set component-id="input" value="Hello world!"/>`
-
-`</event>`
-
-`</events>`
-
-`</window>`
-
-`</view>`
-
-`</presentation-tier>`
-
-`</application-mapping>`
-
-Place the above piece of QAML code in a XML file. An entry in the application-config file have to be made referring the newly created XML file. Assuming that the name of the created XML file is helloworldextended.xml, the following lines of code have to be mentioned in the application-config.xml file
-
-*`<application name="Hello World" id="HelloWorld"*>`
-
-`<application-mapping-file location="helloworldextended.xml"/>`
-
-`</application>`
-
-Once application-config is edited, it is mandatory to refresh the applications. Refreshing can be done either by restarting the server or to using the 'Reload applications' functionality in the 'Qafe Labs' menu option. (Availability of the Reload option depends on the QAFE configuration.) After refreshing/reloading, it should be possible to access the new application via the 'Programs' menu.
-
-**Logs**
-
-For more information check the 'Exceptions' section in the 'Creating SOA Backend' chapter.
-
-**Debug**
-
-             
-
-### 11.1. Special Characteristics of AJAX
-
-### 11.2. Application-Level Windows
-
-### 11.3. Embedding Applications in Web Pages
-
-### 11.4. Debug and Production Mode
-
-### 11.5. Resources
-
-### 11.6. Shortcut Keys
-
-### 11.8. Google App Engine Integration
-
-### 11.9. Common Security Issues
-
-### 11.10. URI Fragment and History Management UriFragmentUtility
-
-### 11.11. Capturing HTTP Requests
-
-### 11.12. Drag and Drop
-
-### 11.13. Logging
-
-### 11.14. Accessing Session-Global Data
-
-
