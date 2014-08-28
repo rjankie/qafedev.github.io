@@ -5,7 +5,7 @@
 
 ## 4 Adding events your applications
 
-Events are used in order to associate actions to components. All the events that need to be defined are included in the *<events>  *tag in QAML file. An event that can be defined within the*<event> *tag can have the following attributes.
+Events are used in order to associate actions to components. All the events that need to be defined are included in the *<events>* tag in QAML file. An event that can be defined within the*<event> *tag can have the following attributes.
 
 <table>
   <tr>
@@ -349,7 +349,7 @@ Example Code:
 
       .
 
-</event>	 
+</event>
 
 Qafe has an internal variable $COUNT which can be set to datastore such that the subsequent business action call executing a select statement should give the count of records as output. Clearing $COUNT from datastore and executing the same business action would give the result set after select query execution. Following is the syntax to be followed.
 
@@ -362,15 +362,15 @@ Qafe has an internal variable $COUNT which can be set to datastore such that the
 	</listeners>
 	<store name=*"$COUNT"* value=*"yes"*/>
 	<!-- Business action for a select query →
-	<business-action ref=*"<xyzBusinessAction>"*>	
+	<business-action ref=*"<xyzBusinessAction>"*>
 		<in name=*"<aInput>"* ref=*"<someCompoonent>"*/>
-		<out name=*"<resultOfBusinessAction>"* 
+		<out name=*"<resultOfBusinessAction>"*
 			 ref=*"<refVariableInBusinessAction>"*/>
 	</business-action>
 	<store-clear name=*"$COUNT" *target=*"pipe"*/>
 	<business-action ref=*"<xyzBusinessAction>"*>
 		<in name=*"<aInput>"* ref=*"<someCompoonent>"*/>
-		<out name=*"<resultOfBusinessAction>"* 
+		<out name=*"<resultOfBusinessAction>"*
        			 ref=*"<refVariableInBusinessAction>"*/>
 	</business-action>
 </event>        
@@ -573,7 +573,7 @@ Example Code - **ITERATION:**
 
 <in name=*"inputVar"* ref=*"tmp.columnName"* />
 
-</business-action>	
+</business-action>
 
 <dialog>
 
@@ -587,7 +587,7 @@ Example Code - **ITERATION:**
 
 </results>
 
-</if>                                       	
+</if>
 
 </iteration>
 
@@ -745,7 +745,7 @@ Rules applied while setting a value to a component:
 
     * container component (like a Panel): the value  or displayname of all child components with the name attribute will be set. 
 
-###### 5.2.4.2 <store> 
+###### 5.2.4.2 <store>
 
 The store tag acts like the concept of session in an application. The store tag in qafe can retain data in local and global scope according to the target specification. If the target is specified as pipe then it represents local scope for the data stored and the variable will only be available within an event. If the target is specified as user, then the data will be available across the events and across windows in the same application. Following are the attributes of <store>
 
@@ -793,7 +793,7 @@ usage is as follows:
 
 `<store name="varName" ref="myComponent" src="pipe" target="pipe"/>`
 
-###### **5.2.4.3 - <store-clear>** 
+###### **5.2.4.3 - <store-clear>**
 
 When store tag is used to maintain data in global scope, the QAML developer have to make sure that the data is removed after use. This can be done using the store-clear tag. Clearing of the data from the global scope can be triggered through appropriate events like onunload.
 
@@ -819,7 +819,7 @@ Following are the attributes of <store-clear>
 
 ##### 5.2.5 Other Builtins
 
-###### 5.2.5.1 <authenticate> 
+###### 5.2.5.1 <authenticate>
 
 The *<authenticate>* tag is used to authorize log ins. The reference to the business action which takes care of the authentication process is mentioned as the *ref *attribute of the tag. The username and password are passed as parameters to the referenced business action. The *<username>* and the *<password> *tag can have attributes same as the <in> tags used in *<business-action>*
 
@@ -831,7 +831,7 @@ The *<authenticate>* tag is used to authorize log ins. The reference to the busi
 
 </authenticate>
 
-###### 5.2.5.2 <clear> 
+###### 5.2.5.2 <clear>
 
 The *<clear>* tag is used to clear the values of the component. The reference of the component whose value needs to be cleared is mentioned as *ref* attribute of the tag as shown below. 
 
@@ -865,7 +865,7 @@ The *<closewindow>* tag is used to close a window. The *ref *attribute of the ta
 
 <closewindow ref=*"*myWindowId"/>
 
-###### 5.2.5.4 <comments> 
+###### 5.2.5.4 <comments>
 
 As the name suggests, the tag is used to introduce comments in the code. Usage is as follows
 
@@ -889,7 +889,7 @@ This tag is used to copy value of one component to another. Usage is as shown.
 
 </dialog>
 
-###### 5.3.5.7 <error-handler> 
+###### 5.3.5.7 <error-handler>
 
 This tag is used as an exception handler. Services which are expected to cause exceptions are declared inside the *<error-handler>* tag. An Error handler tag can have the following attributes.
 
@@ -919,19 +919,19 @@ This tag is used as an exception handler. Services which are expected to cause e
 
 </error-handler>
 
-###### **5.3.5.8 <focus>** 
+###### **5.3.5.8 <focus>**
 
  This tag is used to set cursor focus on a particular component
 
 <focus ref=*"myComponentId"*/>
 
-###### 5.3.5.9 <logout> 
+###### 5.3.5.9 <logout>
 
 ** **The logout tag is used to sign out from the current authenticated session. The *confirmation-required *attribute can have true or false value. A true value as for confirmation before logging out. Usage is as follows.
 
 <logout confirmation-required=*"true"*/>
 
-###### 5.3.5.10 <openwindow> 
+###### 5.3.5.10 <openwindow>
 
 Further windows can be opened as internal window to QAFE or as an external window using this tag. Attributes of *<openwindow>* tag are as follows.
 
@@ -1039,7 +1039,7 @@ In the destination window the data passed using the above code snippet can be fe
 
 <set component-id=*"componentId"* ref=*"varName"* src=*"user"*/>
 
-###### 5.3.5.11 <set-panel> 
+###### 5.3.5.11 <set-panel>
 
 The *<set-panel>* tag is used to dynamically replace an existing panel with another one defined using *<panel-definition> *tag. Usage is as follows.
 
@@ -1047,7 +1047,7 @@ The *<set-panel>* tag is used to dynamically replace an existing panel with anot
 
 *sourcePanel *is the id of the replacing panel and targetPanel is the id of the panel being replaced.
 
-###### 5.2.5.12 <set-property> 
+###### 5.2.5.12 <set-property>
 
 In order to dynamically set some properties of components the <set-property> tag can be used. The properties that can be dynamically set are currentpage, displayname, editable, enabled, width, height, selected-row, title, tooltip, visible and width. Depending on the property, the value attribute of the <set-property> tag can be an interger, a boolean or a string. More than one component can be set with same property using a single <set-property> tag Usage is as follows.
 
@@ -1123,7 +1123,7 @@ Following table lists the attributes that a show panel built-in can have.
   <tr>
     <td>modal</td>
     <td>If set to true keyboard or mouse events that do not target the show panel or its children will be ignored. Default value is false (optional)
-When modal=true the window or the already opened show panel from which this show-panel is called will get a different background color to show the active panel. 
+When modal=true the window or the already opened show panel from which this show-panel is called will get a different background color to show the active panel.
 </td>
   </tr>
   <tr>
@@ -1201,7 +1201,7 @@ modal="<true/false>"/>
 
 </presentation-tier>
 
-###### 5.2.5.17 <close-panel> 
+###### 5.2.5.17 <close-panel>
 
 This tag is used to close a panel invoked using show-panel built-in. If show-panel built-in is called in an event with auto-hide as false then in order to remove it from the browser qafe developer need to use the close-panel built-in. Usage is as follows
 
@@ -1555,7 +1555,7 @@ Using **$SQL **as prefix**:**
 
 In scenarios where the query or part of the query or the value for *where* attribute needs to be something which can be managed dynamically then QAML developer can prefix the name of input variables for methods in the service with **$SQL **and can use that variable name in the statement file where replacement is expected to happen. This can be useful when queries are dynamically generated according to logic or input from the end user.
 
-Example:- 
+Example:-
 
 In Qaml File:
 
@@ -1611,7 +1611,7 @@ Resources are defined as entry points of data in an application. By defining res
 
 Mostly applications are designed to get data from database. It is normal to use a framework to manage the connections, data mapping, etc. In QAFE the accessing to one or more databases is easy. We only need to specify the datasource and the location of SQL statements (statements file). In this way you do not have to develop complex components to maintain connections or manage the communication between front-end and back-end. There are two options for accesing a database: using drivermanager or JNDI datasource.
 
-#### **drivermanager-datasource **resource. 
+#### **drivermanager-datasource **resource.
 
 Use this option if you want to access to the database using drivermanager. The possible attributes are:
 
@@ -1711,7 +1711,7 @@ Basic example:
 
 `</resource-tier>`
 
-#### **Statements file**. 
+#### **Statements file**.
 
 In order to access the database, SQL statements are composed in a separate file in XML format. This has to be referenced in the resources tier. A basic example of the content of this file is as follows:
 
@@ -1861,7 +1861,7 @@ In order to access the database, SQL statements are composed in a separate file 
 
                                 <!--  The name "P_EMPNO" should be matched 
 
-                                        with the argument defined in the database  		 					  Ref "0" is the index for the first argument (zero-based) as 
+                                        with the argument defined in the database  		 					  Ref "0" is the index for the first argument (zero-based) as
 
                                         result of the function call
 
@@ -1999,7 +1999,7 @@ In order to access the database, SQL statements are composed in a separate file 
 
                 			<!--  The name "P_EMPNO" (IN) should be matched 
 
-				       with named variable :P_EMPNO and  "P_ENAME (OUT)       
+				       with named variable :P_EMPNO and  "P_ENAME (OUT)
 
                                               should be matched  with named variable :P_ENAME
 
@@ -2013,7 +2013,7 @@ In order to access the database, SQL statements are composed in a separate file 
 
 `                </method>`		    
 
-`            </service>`		
+`            </service>`
 
 `		</services>`
 
@@ -2057,7 +2057,7 @@ For eg:
 
 `  <textfield  name="PROJECT_NAME" group-name="LNE_TYP" />`
 
-`  <textfield  id="start_date" name="START_DATE" group-name="LNE_TYP"  type="date"/>`    
+`  <textfield  id="start_date" name="START_DATE" group-name="LNE_TYP"  type="date"/>`
 
 Call a business action invoking this call statement passing the map as input:
 
@@ -2143,7 +2143,7 @@ Call a business action invoking this call statement passing the map as input:
 
 `         	</method>`
 
-**Notes:** It is not mandatory to use all the attributes in the map while calling the business action. For the attributes which are not passed value null will be set and send to the procedure. 
+**Notes:** It is not mandatory to use all the attributes in the map while calling the business action. For the attributes which are not passed value null will be set and send to the procedure.
 
 It is not necessary to use the group-name as the Object name but the name attribute in the inputs should match with the attribute names in the Object in database.
 
@@ -2209,7 +2209,7 @@ Statement type definitions can be found on the following page: [http://www.qafe
 
 * With id and table attribute
 
-		**_eg;_** 
+		**_eg;_**
 
 `<update id="myUpdate" table="TABLE_NAME"/>`
 
@@ -2221,7 +2221,7 @@ In case of Collection object being passed as input paramter the key of Map insid
 
 		**_Note:_** Sql statement provided in the attribute must be valid.
 
-**_		    eg;_** 
+**_		    eg;_**
 
 `<update id="myUpdate"` `sql="update TABLE_NAME set <COLUMN_NAME>=:<refVarName>, <COLUMN_NAME>=:<refVarName> .... where <COLUMN_NAME>=:<refVarName>"/>`
 
@@ -2233,13 +2233,13 @@ In case of Collection object being passed as input parameter the key of Map insi
 
 * With value being provided directly. 
 
-		**_eg;_** 
+		**_eg;_**
 
 `<update id="myUpdate" sql="update TABLE_NAME set <COLUMN_NAME>=<value>, <COLUMN_NAME>=<value>, ...." where="<COLUMN_NAME>=<value>"/>`
 
 * With table and where attribute mentioned
 
-		**_eg;_** 
+		**_eg;_**
 
 `<update id="myUpdate" table="QAFE_TEST_UPDATE" where="ID > :ID and ADDRESS=:ADDRESS"/>`
 
@@ -2375,7 +2375,7 @@ Example:
 
 `	       jarfile-location="myLibrary.jar"/>`
 
-#### **spring** resource. 
+#### **spring** resource.
 
 This tag is used to specify the Spring context as resource. The possible attribute is:
 
@@ -2383,7 +2383,7 @@ This tag is used to specify the Spring context as resource. The possible attribu
   <tr>
     <td>use-web-config</td>
     <td>Default value false.
-When set to true Spring Context loaded in web.xml will be used to get the spring beans. 
+When set to true Spring Context loaded in web.xml will be used to get the spring beans.
 In this case config-files attribute values will be ignored.</td>
   </tr>
   <tr>
@@ -2393,7 +2393,7 @@ In this case config-files attribute values will be ignored.</td>
 </table>
 
 
-* **_spring-bean_** element. 
+* **_spring-bean_** element.
 
 This tag is used to specify the bean in the Spring context. The possible attributes are:
 
@@ -2665,7 +2665,7 @@ The adapter can also be used if you want to pass a list of objects to stored-pro
 
 `sql="{call sumSalaryOfEmployees(?,?,?)}"/>`
 
-Note: 
+Note:
 
 There is no need to define an adapter for the "EMP_OBJECT" object, because the name of the object can be retrieved by the metadata. So it’s done implicitly.
 
@@ -2959,4 +2959,3 @@ To summarize:
 * When an error-handler is found for the error, it will process the built-ins defined in the body of the error-handler, afterward it will continue the flow after the error-handler
 
 * When an error-handler is found for the error, the built-ins between the error-handler and the built-in which caused the error will not be processed
-
