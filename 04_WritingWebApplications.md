@@ -21,11 +21,11 @@ Events are used in order to associate actions to components. All the events that
         </rootpanel>
       </window>
       <events>
-        <event id=*"myEventId"*>
+        <event id="myEventId">
               <listeners>
                     <listenergroup>
-                          <component ref=*"myComponentId"* />
-                          <listener type=*"onclick"* />
+                          <component ref="myButton" />
+                          <listener type="onclick" />
                     </listenergroup>
               </listeners>
               <!-- built in function declarations will go here -->
