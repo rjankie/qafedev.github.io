@@ -12,7 +12,7 @@
 * [Advanced Web Application Topics](11_AdvancedWebApplicationTopics.md)
 * [Rapid Application Development Using QOCA](12_RapidApplicationDevelopmentUsingQOCA.md)
 * [QAFE Add-ons](13_QAFEAddOns.md)
-* [Appendix A: QAML](AppendixA-QAML.md)
+
 
 For References QAML, checkout the following:
 
