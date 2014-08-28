@@ -13,3 +13,10 @@
 * [Rapid Application Development Using QOCA](12_RapidApplicationDevelopmentUsingQOCA.md)
 * [QAFE Add-ons](13_QAFEAddOns.md)
 * [Appendix A: QAML](AppendixA-QAML.md)
+
+For References to all XML defintions, checkout:
+
+* [application-mapping, tags to be used in defining an application]( http://www.qafe.com/static/documentation/api/application-mapping.html)
+* [application-context, tags to be used in definition of the QAFE environment](http://www.qafe.com/static/documentation/api/application-context.html)
+* [application-messages, tags to be used for multilingual support](http://www.qafe.com/static/documentation/api/application-messages.html)
+* [application-statements, tags to be used for the interface to your database (queries, etc.)](http://www.qafe.com/static/documentation/api/application-statements.html)
