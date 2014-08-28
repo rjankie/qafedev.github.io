@@ -101,6 +101,6 @@ This application show a window with in there a button with the label "Helloworld
 
 ![helloworld](assets/images/simplehelloworld.png)
 
-We'll dive into the details of the application itself later.
+We'll dive into the details of the application itself in the following chapters.
 
 > Important to understand is that each layer of the architecture will be a tag or portion in the QAML file
