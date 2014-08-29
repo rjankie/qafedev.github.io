@@ -8,7 +8,7 @@
 
 #### Free training material
 
-* [QAFE Bootcamp: Getting started with QAFE](QAFEBootCamp-CourseMaterial2.3.pdf)
+* [QAFE Bootcamp: Getting started with QAFE (PDF)](QAFEBootCamp-CourseMaterial2.3.pdf)
 
 #### For References QAML, checkout the following:
 
