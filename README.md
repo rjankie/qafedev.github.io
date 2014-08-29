@@ -16,3 +16,5 @@
 * [application-context](http://www.qafe.com/static/documentation/api/application-context.html), tags to be used in definition of the QAFE environment
 * [application-messages](http://www.qafe.com/static/documentation/api/application-messages.html), tags to be used for multilingual support
 * [application-statements](http://www.qafe.com/static/documentation/api/application-statements.html), tags to be used for the interface to your database (queries, etc.)
+
+For more information please contact us at [support@qafe.com](support@qafe.com) or create an issue.
