@@ -458,16 +458,16 @@ All the supported operators and usage has been list below.
   <tr>
     <td>%</td>
     <td>%salar</td>
-    <td>select * from table_name where x like ‘%salar’</td>
+    <td>select * from table_name where x like ‘%foo</td>
   </tr>
   <tr>
     <td>*</td>
     <td>*salar</td>
-    <td>select * from table_name where x like ‘%salar’</td>
+    <td>select * from table_name where x like ‘%foo</td>
   </tr>
   <tr>
     <td>_</td>
     <td>s_lar</td>
-    <td>select * from table_name where x like ‘s_lar’</td>
+    <td>select * from table_name where x like ‘f_o’</td>
   </tr>
 </table>
