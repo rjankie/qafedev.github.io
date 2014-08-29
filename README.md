@@ -6,9 +6,11 @@
 * [Writing Web Applications](04_WritingWebApplications.md)
 * [Advanced Web Application Topics](11_AdvancedWebApplicationTopics.md)
 
+#### Free training material
 
+* [QAFE Bootcamp: Getting started with QAFE](QAFEBootCamp-CourseMaterial2.3.pdf)
 
-For References QAML, checkout the following:
+#### For References QAML, checkout the following:
 
 * [application-mapping]( http://www.qafe.com/static/documentation/api/application-mapping.html) , tags to be used in defining an application
 * [application-context](http://www.qafe.com/static/documentation/api/application-context.html), tags to be used in definition of the QAFE environment
