@@ -5,7 +5,6 @@
 * [QAFE Basics](03_QAFEBasics.md)
 * [Writing Web Applications](04_WritingWebApplications.md)
 * [BindingComponentsToData](09_BindingComponentsToData.md)
-* [QAFE Database Resource](10_QAFEDatabaseResource.md)
 * [Advanced Web Application Topics](11_AdvancedWebApplicationTopics.md)
 * [Rapid Application Development Using QOCA](12_RapidApplicationDevelopmentUsingQOCA.md)
 
