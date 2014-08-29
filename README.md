@@ -6,7 +6,6 @@
 * [Writing Web Applications](04_WritingWebApplications.md)
 * [BindingComponentsToData](09_BindingComponentsToData.md)
 * [Advanced Web Application Topics](11_AdvancedWebApplicationTopics.md)
-* [Rapid Application Development Using QOCA](12_RapidApplicationDevelopmentUsingQOCA.md)
 
 
 
