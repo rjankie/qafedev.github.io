@@ -1401,435 +1401,246 @@ Basic example:
 #### Statements file.
 
 In order to access the database, SQL statements are composed in a separate file in XML format. This has to be referenced in the resources tier. A basic example of the content of this file is as follows:
-
+```XML
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-      <statements xmlns="http://qafe.com/schema"`
-
-`	           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"`
-
-`	           xsi:schemaLocation="http://qafe.com/schema `
-
-*`	               http://www.qafe.com/schema/application-statements.xsd">
-
-            <select id="selectVendor">
-
-`	        SELECT * FROM VENDORS WHERE ID =  :VENDOR_ID`
-
-`	  </select>
-
-            <select id="selectVendors" table="VENDORS" />
-
-            <insert id="insertVendor" table="VENDORS" />
-
-            <delete id="deleteVendor" table="VENDORS" />
-
-`	  <call id="callProcedureId" sql="call myProcedure(?, ?)" />
-
-`	  <query id="queryId" sql="SELECT * FROM VENDORS" />
-
-`	  <query id="queriesId">
-
-*`		   SELECT * FROM VENDORS, PRODUCTS WHERE ID = :VENDOR_I*D`
-
-	        </query>
-
-      </statements>
+   <statements xmlns="http://qafe.com/schema"`
+	  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://qafe.com/schema 
+			 http://www.qafe.com/schema/application-statements.xsd">
+	      <select id="selectVendor">
+		        SELECT * FROM VENDORS WHERE ID =  :VENDOR_ID
+		</select>
+	    <select id="selectVendors" table="VENDORS" />
+	        <insert id="insertVendor" table="VENDORS" />
+            <delete id="deleteVendor" table="VENDORS" />	
+	    <call id="callProcedureId" sql="call myProcedure(?, ?)" />
+	    <query id="queryId" sql="SELECT * FROM VENDORS" />
+		<query id="queriesId">
+		   SELECT * FROM VENDORS, PRODUCTS WHERE ID = :VENDOR_ID`
+		</query>
+	</statements>
 ```
 #### Function Call Example:
-
-	   
-
 	    Database:
-
+```SQL
     * function get_ename(p_empno in emp.empno%type)  return emp.ename%type
+```
 
-`	<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-      <statements xmlns="http://qafe.com/schema"`
-
-`	           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"`
-
-`	           xsi:schemaLocation="http://qafe.com/schema `
-
-*`	               http://www.qafe.com/schema/application-statements.xsd">
-
-		     <!-- The arguments will be retrieved from the database,
-
-				    so the input names defined in the integration-tier
-
-					should be matched with the name of the arguments;
-
-				    note: in Oracle all names are uppercase
-
-			 -->
-
-`	    <call id="getName1" call-name="get_ename" />
-
-`	    <call id="getName2" sql="{? = call get_ename(?)}" />
-
+```XML
+	<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+	<!-- Assume the following statements
+	<statements xmlns="http://qafe.com/schema" `
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" `
+		xsi:schemaLocation="http://qafe.com/schema `
+	               http://www.qafe.com/schema/application-statements.xsd">
+     <!-- The arguments will be retrieved from the database,     so the 
+			input names defined in the integration-tier should be matched with the name 
+			of the arguments;     note: in Oracle all names are uppercase -->
+		<!-- <call id="getName1" call-name="get_ename" />
+		<call id="getName2" sql="{? = call get_ename(?)}" /> -->
 		     <!-- Assume the function "get_ename" is within a package -->
-
-`	    <call id="getName1" call-name="package_name.get_ename" />
-
-`	    <call id="getName2" sql="{? = call package_name.get_ename(?)}" />
-
-`        <call` `id="getName4"` `sql="{? = call package_name.get_ename(:P_EMP_NO)}"` `/>
-
-`   	 -->
-
-      </statements>
-
-`	<resource-tier>
-
-`		<resources>		   
-
-				  <drivermanager-datasource id="dbResource" `
-
-`	       	statements-file-url="statements.xml" `
-
-`		       url="jdbc:oracle:thin:@127.0.0.1:1521:XE"`
-
-`		       username="apps" `
-
-`	    	   password="apps" `
-
-`		       driver-classname="oracle.jdbc.driver.OracleDriver" />
-
-`		</resources>
-
-`	</resource-tier>		   `
-
-`	<integration-tier>
-
-`		<services>
-
-`			<service id="dbService" resource-ref="dbResource">		   
-
-`				<method id="getName1" name="getName1">		    
-
-	   <!--  The name "P_EMPNO" should be matched
-
-		with the argument defined in the database  -->
-
-`				    <in name="P_EMPNO" value="7389" />		   
-
-	   		<!--  The name "result" defined in the ref attribute
-
-			       is the default name for the return argument of a function
-
-								-->
-
-`				    <out name="result" ref="result" />		   
-
-`				</method>		   
-
-`				<method id="getName2" name="getName2">		   
-
-`					<in name="P_EMPNO" value="7389" />		    
-
-`				    <out name="result" ref="result" />		   
-
-`				</method>		    
-
-`				<method id="getName3" name="getName2">		    
-
-	   	<!--  The name "1" is the index for the second argument, zero-based
-
-        note: the return argument of a function is zero    	-->
-
-`					<in name="1" value="7389" />		   
-
-`				    <out name="result" ref="0" />		   
-
-`				</method>		   
-
-`                <method id="getName4" name="getName4">		    
-
-                                <!--  The name "P_EMPNO" should be matched 
-
-                                        with the argument defined in the database  		 					  Ref "0" is the index for the first argument (zero-based) as
-
-                                        result of the function call
-
-                		-->
-
-`                    <in name="P_EMPNO" value="7389" />            
-
-`				    <out name="result" ref="0" />		    
-
-`				</method>		    
-
-`			</service>
-
-`		</services>
-
-`	</integration-tier>		   `
-
-`   `
+		<!-- <call id="getName1" call-name="package_name.get_ename" />
+		<call id="getName2" sql="{? = call package_name.get_ename(?)}" />
+   		<call  id="getName4" 
+			sql="{? = call package_name.get_ename(:P_EMP_NO)}"  />
+		</statements>  -->
+	<resource-tier>
+		<resources>
+			<drivermanager-datasource id="dbResource"  
+				statements-file-url="statements.xml"  
+				url="jdbc:oracle:thin:@127.0.0.1:1521:XE" ` username="apps"  
+				password="apps"   driver-classname="oracle.jdbc.driver.OracleDriver" />
+		</resources>
+	</resource-tier>
+	<integration-tier>
+		<services>
+			<service id="dbService" resource-ref="dbResource">
+				<method id="getName1" name="getName1">
+					   <!--  The name "P_EMPNO" should be matched with the argument defined 
+						in the database   -->
+					<in name="P_EMPNO" value="7389" />
+					   		<!--  The name "result" defined in the ref attribute is the default 
+						name for the return argument of a function -->
+					<out name="result" ref="result" />
+				</method>
+				<method id="getName2" name="getName2">
+					<in name="P_EMPNO" value="7389" />
+					<out name="result" ref="result" />
+				</method>
+				<method id="getName3" name="getName2">
+					   	<!--  The name "1" is the index for the second argument, zero-based 
+						note: the return argument of a function is zero     -->
+					<in name="1" value="7389" />
+					<out name="result" ref="0" />
+				</method>
+				<method   id="getName4"   name="getName4">
+					                                <!--  The name "P_EMPNO" should be matched  
+						                                        with the argument defined in the 
+						database     Ref "0" is the index for the first argument (zero-based) as 
+						result of the function call                 -->
+					<in   name="P_EMPNO"   value="7389"   />
+					<out   name="result"   ref="0"   />
+				</method>
+			</service>
+		</services>
+	</integration-tier>
+```
 
 #### Procedure Call Example
 
-
-
-	   Database:
-
+Database:
+```SQL
     *  procedure get_ename(p_empno in emp.empno%type, p_ename out emp.ename%type)
-
-`    <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-      <statements xmlns="http://qafe.com/schema"`
-
-`	           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"`
-
-`	           xsi:schemaLocation="http://qafe.com/schema `
-
-*`	               http://www.qafe.com/schema/application-statements.xsd">
-
-		     <!-- The arguments will be retrieved from the database,
-
-		     	   so the input names defined in the integration-tier
-
-					should be matched with the name of the arguments;
-
-				    note: in Oracle all names are uppercase
-
-			 -->
-
-`	    <call id="getName1" call-name="get_ename" />
-
-`	    <call id="getName2" sql="{call get_ename(?,?)}" />
-
-		     <!-- Assume the procedure "get_ename" is within a package
-
-`	    <call id="getName1" call-name="package_name.get_ename" />
-
-`	    <call id="getName2" sql="{call package_name.get_ename(?,?)}" />
-
-`        <call id="getName4" `
-
-*`			sql="{call package_name.get_ename(:P_EMP_NO,:P_ENAME)}" /*>
-
-`   	 -->
-
-      </statements>
-
-`	<resource-tier>
-
-`		<resources>		   
-
-				  <drivermanager-datasource id="dbResource" `
-
-`	       	statements-file-url="statements.xml" `
-
-`		       url="jdbc:oracle:thin:@127.0.0.1:1521:XE"`
-
-`		       username="apps" `
-
-`	    	   password="apps" `
-
-`		       driver-classname="oracle.jdbc.driver.OracleDriver" />
-
-`		</resources>
-
-`	</resource-tier>		   `
-
-`	<integration-tier>
-
-`		<services>
-
-`			<service id="dbService" resource-ref="dbResource">		   
-
-`				<method id="getName1" name="getName1">		    
-
-	   	<!--  The name "P_EMPNO" (IN) should be matched
-
-		with the argument defined in the database  -->
-
-`				    <in name="P_EMPNO" value="7389" />		   
-
-	   	<!--  The name "P_ENAME" (OUT) defined in the ref attribute
-
-		  should be matched with the argument defined in the database
-
-								-->
-
-`				    <out name="result" ref="P_ENAME" />		   
-
-`				</method>		   
-
-`				<method id="getName2" name="getName2">		   
-
-`					<in name="P_EMPNO" value="7389" />		    
-
-`					<out name="result" ref="P_ENAME" />		   
-
-`				</method>		    
-
-`				<method id="getName3" name="getName2">		    
-
-	   		<!--  The name "0" is the index for the first argument,
-
-				zero-based-->
-
-`					<in name="0" value="7389" />		    
-
-	   				<!--  The name "1" defined in the ref attribute
-
-					is the index for the second argument
-
-								-->
-
-`				    <out name="result" ref="1" />		   
-
-`				</method>		   
-
-                			<!--  The name "P_EMPNO" (IN) should be matched 
-
-				       with named variable :P_EMPNO and  "P_ENAME (OUT)
-
-                                              should be matched  with named variable :P_ENAME
-
-                                -->
-
-`                <method id="getName4" name="getName4">		    
-
-`                    <in name="P_EMPNO" value="7389" />		    
-
-`                    <out name="result" ref="P_ENAME" />		    
-
-`                </method>		    
-
-`            </service>
-
-`		</services>
-
-`	</integration-tier>		   `
+```
+```XML
+ 
+	  <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+	     
+	<!--  <statements xmlns="http://qafe.com/schema" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:schemaLocation="http://qafe.com/schema 
+		               http://www.qafe.com/schema/application-statements.xsd">
+-->
+		     <!-- The arguments will be retrieved from the database,          so 
+			the input names defined in the integration-tier should be matched with the 
+			name of the arguments;     note: in Oracle all names are uppercase -->
+
+<!-- 		<call id="getName1" call-name="get_ename" />
+
+		`    
+		<call id="getName2" sql="{call get_ename(?,?)}" />
+ -->
+		     <!-- Assume the procedure "get_ename" is within a package `     <call 
+			id="getName1" call-name="package_name.get_ename" /> `     <call id="getName2" 
+			sql="{call package_name.get_ename(?,?)}" /> `        <call id="getName4" ` 
+			*` sql="{call package_name.get_ename(:P_EMP_NO,:P_ENAME)}" /*> `    -->
+
+		     
+	<!-- </statements>-->
+	<resource-tier>
+		<resources>
+			<drivermanager-datasource id="dbResource"  
+				statements-file-url="statements.xml"  
+				url="jdbc:oracle:thin:@127.0.0.1:1521:XE" ` username="apps"  
+				password="apps"   driver-classname="oracle.jdbc.driver.OracleDriver" />
+		</resources>
+</resource-tier>
+	<integration-tier>
+		<services>
+			<service id="dbService" resource-ref="dbResource">
+				<method id="getName1" name="getName1">
+					   	<!--  The name "P_EMPNO" (IN) should be matched with the argument 
+						defined in the database   -->
+					<in name="P_EMPNO" value="7389" />
+					   	<!--  The name "P_ENAME" (OUT) defined in the ref attribute should 
+						be matched with the argument defined in the database -->
+					<out name="result" ref="P_ENAME" />
+				</method>
+				<method id="getName2" name="getName2">
+					<in name="P_EMPNO" value="7389" />
+					<out name="result" ref="P_ENAME" />
+				</method>
+				<method id="getName3" name="getName2">
+					   		<!--  The name "0" is the index for the first argument, zero-based -->
+						<in name="0" value="7389" />
+		   				<!--  The name "1" defined in the ref attribute is the index for the 
+						second argument -->
+						<out name="result" ref="1" />
+				</method>
+				<!--  The name "P_EMPNO" (IN) should be matched    with 
+					named variable :P_EMPNO and "P_ENAME (OUT) should be matched  with named 
+					variable :P_ENAME                                 -->
+				<method   id="getName4"   name="getName4">
+					<in   name="P_EMPNO"   value="7389"   />
+					<out   name="result"   ref="P_ENAME"   />           
+				</method>      
+			</service>
+		</services>
+	</integration-tier>
+
+```
 
 #### Calling procedures with Oracle Object type as IN/OUT:
 
 	Suppose the database contains a procedure with Object TYPE as in/out variable.
 
 database type.
-
-`create or replace TYPE lne_typ AS OBJECT `
-
-`( line_id		  NUMBER(38)`
-
-`, header_id		  NUMBER(38)`
-
-`, project_id        NUMBER(38,0)`
-
-`, project_name      VARCHAR(30)`
-
-`, start_date        DATE`
-
-` );`
+```
+create or replace TYPE lne_typ AS OBJECT 
+( line_id		  NUMBER(38)
+, header_id		  NUMBER(38)
+, project_id        NUMBER(38,0)
+, project_name      VARCHAR(30)
+, start_date        DATE
+ );
 
 PROCEDURE modifyObject (p_obj_lne1 in out lne_typ);
+```
 
 In statements file add this entry.
-
+```XML
 <call id="callModifyObject" sql="call QAFE_COMPLEX_DATA.modifyObject(?)"/>
+```
 
 ##### Passing input as a Map containing the attributes.
 
 For eg:
-
+```XML
    <textfield  name="LINE_ID" group-name="LNE_TYP" />
-
-`  <textfield  name="HEADER_ID" group-name="LNE_TYP" />
-
-`  <textfield id="project_id" name="PROJECT_ID" group-name="LNE_TYP"  />
-
-`  <textfield  name="PROJECT_NAME" group-name="LNE_TYP" />
-
-`  <textfield  id="start_date" name="START_DATE" group-name="LNE_TYP"  type="date"/>
-
+   <textfield  name="HEADER_ID" group-name="LNE_TYP" />
+   <textfield id="project_id" name="PROJECT_ID" group-name="LNE_TYP"  />
+   <textfield  name="PROJECT_NAME" group-name="LNE_TYP" />
+   <textfield  id="start_date" name="START_DATE" group-name="LNE_TYP"  type="date"/>
+```
 Call a business action invoking this call statement passing the map as input:
 
+```XML
 <business-action ref="callModifyObject">
+		<in name="mydata" ref="LNE_TYP" src="component" />
+		<out name="result" ref="result" />
+	</business-action>
+	<set group-name="LNE_TYP" ref="result[0]" />
+	 ..
+	<business-action id="callModifyObject">
+		<transaction managed="no" />
+		<service ref="callWithObject" method-ref="callModifyObject">
+			<in name="mydata" ref="mydata" />
+			<out name="result" ref="result" />
+		</service>
+	</business-action>
+	 ..
+	<method id="callModifyObject" name="callModifyObject">
+		<in name="0" ref="mydata" />
+		<out name="result" ref="0" />
+	</method>
 
-`		<in name="mydata" ref="LNE_TYP" src="component"/>
-
-`		<out name="result" ref="result" />
-
-`	</business-action>
-
-`	<set group-name="LNE_TYP"	ref="result[0]"/> `
-
-`	...`
-
-`	<business-action id="callModifyObject">
-
-`		<transaction managed="no" />
-
-`		<service ref="callWithObject" method-ref="callModifyObject">
-
-`			<in name="mydata" ref="mydata"/>
-
-`			<out name="result" ref="result"/>
-
-`		</service>
-
-`	</business-action>
-
-`	..`
-
-`	<method id="callModifyObject" name="callModifyObject">
-
-`         		<in name="0" ref="mydata" />
-
-`		<out name="result" ref="0"/>
-
-`      	</method>
-
-##### Passing input attributes separately.
+	##### Passing input attributes separately.
 
 	<business-action ref="passMultipleInputs">
+		<in name="START_DATE" ref="start_date" src="component" />
+		<in name="PROJECT_ID" ref="project_id" src="component" />
+		<out name="result" ref="result" />
+	</business-action>
+	<set component-id="start_date" ref="result[0].START_DATE" />
+	<set component-id="project_id" ref="result[0].PROJECT_ID" />
+	 ..
+	<business-action id="passMultipleInputs">
+		<transaction managed="no" />
+		<service ref="callWithObject" method-ref="passMultipleInputs">
+			<in name="START_DATE" ref="START_DATE" />
+			<in name="PROJECT_ID" ref="PROJECT_ID" />
+			<out name="result" ref="result" />
+		</service>
+	</business-action>
+	 ..
+	<method id="passMultipleInputs" name="callWithObjectInput">
+		<in name="START_DATE" ref="START_DATE" />
+		<in name="PROJECT_ID" ref="PROJECT_ID" />
+		<out name="result" ref="1" />
+	</method>
 
-`		<in name="START_DATE" ref="start_date" src="component"/>
-
-`		<in name="PROJECT_ID" ref="project_id" src="component"/>
-
-`		<out name="result" ref="result" />
-
-`	</business-action>
-
-`	<set component-id="start_date"	ref="result[0].START_DATE"/>	 	 `
-
-`	<set component-id="project_id"	ref="result[0].PROJECT_ID"/>
-
-`  	..`
-
-`	<business-action id="passMultipleInputs">
-
-`		<transaction managed="no" />
-
-`		<service ref="callWithObject" method-ref="passMultipleInputs">
-
-`			<in name="START_DATE" ref="START_DATE" />
-
-`			<in name="PROJECT_ID" ref="PROJECT_ID" />
-
-`			<out name="result" ref="result"/>
-
-`		</service>
-
-`	</business-action>
-
-`	..`
-
-` 	<method id="passMultipleInputs" name="callWithObjectInput">
-
-`         		<in name="START_DATE" ref="START_DATE" />
-
-`         		<in name="PROJECT_ID" ref="PROJECT_ID" />
-
-`		<out name="result" ref="1"/>
-
-`         	</method>
-
+```
 Notes: It is not mandatory to use all the attributes in the map while calling the business action. For the attributes which are not passed value null will be set and send to the procedure.
 
 It is not necessary to use the group-name as the Object name but the name attribute in the inputs should match with the attribute names in the Object in database.
@@ -1838,39 +1649,44 @@ It is not necessary to use the group-name as the Object name but the name attrib
 
 There are two possible ways to construct queries in statements XML file. We can either write the SQL itself or we can declare the table to work with. This is because we can assign a complete data structure of key-value pairs to the statement in the integration tier. This allows direct assigning and fetching of data from and to complex components like datagrids. It implies that if an event on a data structure (like a datagrid) is assigned to a business action, the SQL associated with the service referenced in the business action is going to be executed and can manipulate more than one record at a time (eg; massive inserts). Example is as shown below
 
+```XML
 <select id="selectVendor">SELECT * FROM VENDORS WHERE ID = :VENDOR_ID</select>
-
+```
 or as an attribute:
-
+```XML
 <select id="selectVendor" sql="SELECT * FROM VENDORS WHERE ID = :VENDOR_ID”/>
+```
 
 While processing there is no differences between the two ways. By using the first option you can declare the statement in a CDATA structure. This is useful if you intend to use complex statements with several quotes in it. For example:
 
+```XML
 <![CDATA[SELECT * FROM PRODUCTS WHERE PRICE > 100]]>
-
+```
 Note: If both the options are specified for the same query, the first one will be taken into account by QAFE.
 
 A more generic approach for construction of queries in a statements XML file is by using a query as shown below:
 
+```XML
 <query id="queriesId">
 
 `	SELECT * FROM VENDORS, PRODUCTS WHERE ID = :VENDOR_ID`
 
 </query>
+```
 
 The same rules which apply to the before mentioned statements, apply to the query. However, the SQL statement can now be of type INSERT, UPDATE, DELETE, etc. 
 
 It is also possible to execute stored procedure calls. The syntax for calling a stored procedure is
-
+```XML
 <call id="callProcedureId" sql="call myProcedure(?, ?)" />
-
+```
 IN/OUT parameters should match the arguments in the the stored procedures themselves.
 
 Note: In case of an Oracle database, OUT parameters can also be of type SYS_REFCURSOR, which will be handled like a standard (select) query.
 
 Statement type definitions can be found on the following page: [http://www.qafe.com/static/documentation/api/application-statements.html](http://www.qafe.com/static/documentation/api/application-statements.html)
 
-##### Usage of <update> in statement file:
+##### Usage of ``<update>`` in statement file:
 
  The <update> is used in a statement qaml file to perform update operation on tables in the database. <update> `can be used including following attributes 
 
@@ -1897,9 +1713,9 @@ Statement type definitions can be found on the following page: [http://www.qafe
 * With id and table attribute
 
 		_eg;_
-
+```XML
 <update id="myUpdate" table="TABLE_NAME"/>
-
+```
 Referencing the above mentioned example and in case of parameters being passed to an update tag, it can be of simple data types and complex data types like Map or Collection. In case of simple data types the reference variable name used must be same as that of the column name to be updated. If Map data type is used as input parameter then the key in the map should be same as that of the column name to be updated.
 
 In case of Collection object being passed as input paramter the key of Map inside the Collection object should be same as that of the column name to be updated
@@ -1909,10 +1725,10 @@ In case of Collection object being passed as input paramter the key of Map insid
 		_Note:_ Sql statement provided in the attribute must be valid.
 
 _		    eg;_
-
+```XML
 <update id="myUpdate"` `sql="update TABLE_NAME set <COLUMN_NAME>=:<refVarName>, <COLUMN_NAME>=:<refVarName> .... where <COLUMN_NAME>=:<refVarName>"/>
-
-In case of parameters being passed as simple data types, the reference variable mentioned in <method> and the variable name used in the sql statement should be same.
+```
+In case of parameters being passed as simple data types, the reference variable mentioned in ``<method>`` and the variable name used in the sql statement should be same.
 
 If Map data type is used as input parameter then the key in the map should match with the variable name in the sql statement.
 
@@ -1921,25 +1737,25 @@ In case of Collection object being passed as input parameter the key of Map insi
 * With value being provided directly. 
 
 		_eg;_
-
+```XML
 <update id="myUpdate" sql="update TABLE_NAME set <COLUMN_NAME>=<value>, <COLUMN_NAME>=<value>, ...." where="<COLUMN_NAME>=<value>"/>
-
+```
 * With table and where attribute mentioned
 
 		_eg;_
-
+```XML
 <update id="myUpdate" table="QAFE_TEST_UPDATE" where="ID > :ID and ADDRESS=:ADDRESS"/>
+```
+When where attribute is used along with table name specified in update tag without sql attribute, the reference variable mentioned in ``<method>`` to pass parameters to <update> must match column names in the table.
 
-When where attribute is used along with table name specified in update tag without sql attribute, the reference variable mentioned in <method> to pass parameters to <update> must match column names in the table.
+##### - Usage of ``<select>`` in statement file:
 
-##### - Usage of <select> in statement file:
-
- The <select> is used in a statement qaml file to perform select operation on tables in the database. <select> `can be used including following attributes 
+ The ``<select>`` is used in a statement qaml file to perform select operation on tables in the database. ``<select>``can be used including following attributes 
 
 <table>
   <tr>
     <td>id</td>
-    <td>The id attribute of <select> is used as value for the name attribute of the <method> mentioned within the integration tier.</td>
+    <td>The id attribute of ``<select>`` is used as value for the name attribute of the <method> mentioned within the integration tier.</td>
   </tr>
   <tr>
     <td>table</td>
@@ -1952,37 +1768,38 @@ When where attribute is used along with table name specified in update tag witho
 </table>
 
 
-* sql can also be specified as text between select tag like <select>select * from TBALE_NAME</select> (here after referred as sql text)
+* sql can also be specified as text between select tag like ``<select>select * from TBALE_NAME</select>`` (here after referred as sql text)
 
-* If sql and table are specified together in <select> then only one will be considered based on priority. First will check sql, then sql as text between <select> , if they are empty will take table attribute.
+* If sql and table are specified together in ``<select>`` then only one will be considered based on priority. First will check sql, then sql as text between ``<select>`` , if they are empty will take table attribute.
 
-* In case of parameters being passed to a select tag from integration tier, it can be of simple data types or a Map. In case of simple data types the reference variable name used must be same as that of the column name in *`TABLE_NAM*E`. If Map data type is used as input parameter then the keys in the map should be same as that of the column names in *`TABLE_NAM*E`.
+* In case of parameters being passed to a select tag from integration tier, it can be of simple data types or a Map. In case of simple data types the reference variable name used must be same as that of the column name in ``TABLE_NAME``. If Map data type is used as input parameter then the keys in the map should be same as that of the column names in ``TABLE_NAME``.
 
 * With id and table attribute
 
 		_eg;_
-
+```XML
  <select id="mySelect" table="TABLE_NAME"/>
-
-Referencing the above mentioned example without passing any input parameter from integration tier will result in query *`select * from TABLE_NAME.* `
+```
+Referencing the above mentioned example without passing any input parameter from integration tier will result in ``query *`select * from TABLE_NAME``
 
 If parameters are passed as inputs that will be used to create the where clause. 
 
   _eg;_  if you pass column1  as the input with value ABC then the query formed will be* *
+```XML
 
-*`select * from TABLE_NAME where column1='ABC*'`
-
+select * from TABLE_NAME where column1='ABC*'
+```
 * With sql query Attribute. If sql attribute is used in select tag, then the other attributes of the tag are ignored and the sql statement mentioned inside the attribute is executed.       
 
 _		    eg;_ 
-
+```XML
 <select id="mySelect"` `sql="slect COLUMN_NAME from TABLE_NAME where COLUMN_NAME=:refVarName"/> `
-
-`- refVarName `should be passed as the input to replace the placeholder.    
+```
+- refVarName `should be passed as the input to replace the placeholder.    
 
 ##### - Usage of <delete> in statement file:
 
- The <delete> is used in a statement qaml file to perform select operation on tables in the database. <delete> `can be used including following attributes 
+ The ``<delete>`` is used in a statement qaml file to perform select operation on tables in the database. <delete> `can be used including following attributes 
 
 <table>
   <tr>
@@ -2004,30 +1821,30 @@ _		    eg;_ 
 </table>
 
 
-* If sql and table are specified together in <delete> then only one will be considered based on priority. First will check sql, then sql as text between <select> , if they are empty will take table attribute.
+* If sql and table are specified together in <delete> then only one will be considered based on priority. First will check sql, then sql as text between ``<select>`` , if they are empty will take table attribute.
 
-* In case of parameters being passed to a delete tag from integration tier, it can be of simple data types or a Map. In case of simple data types the reference variable name used must be same as that of the column name in *`TABLE_NAM*E`. If Map data type is used as input parameter then the keys in the map should be same as that of the column names in *`TABLE_NAM*E`.
+* In case of parameters being passed to a delete tag from integration tier, it can be of simple data types or a Map. In case of simple data types the reference variable name used must be same as that of the column name in ``TABLE_NAME``. If Map data type is used as input parameter then the keys in the map should be same as that of the column names in ``TABLE_NAME``.
 
 * With id and table attribute
 
 		_eg;_ 
-
+```XML
 <delete id="myDelect" table="TABLE_NAME"/>
-
-Referencing the above mentioned example without passing any input parameter from integration tier will result in query *`delete from TABLE_NAME.* `
+```
+Referencing the above mentioned example without passing any input parameter from integration tier will result in ``query *delete from TABLE_NAME `
 
 If parameters are passed as inputs that will be used to create the where clause. 
 
   _eg;_  if you pass column1  as the input with value ABC then the query formed will be* *
 
-*`delete from TABLE_NAME where column1='ABC*'`
+* ``delete from TABLE_NAME where column1='ABC*'``
 
 * With sql query Attribute. If sql attribute is used in delete tag, then the other attributes of the tag are ignored and the sql statement mentioned inside the attribute is executed.       
 
 _		    eg;_ 
-
+```XML
 <delete id="myDelect"` `sql="delete from TABLE_NAME where COLUMN_NAME=:refVarName"/> `
-
+```
 `- refV type here -Binu Badurudeen 9/2/11 4:07 PM arName `should be passed as the input to replace the placeholder.
 
 * VPD. In QAFE is possible to access to the database via VPD (Virtual Private Database).
@@ -2057,11 +1874,9 @@ You can reuse your java classes in QAFE or add new ones. To access java classes 
 
 
 Example:
-
-<javaclass id="MyJavaResource" classname="MyJavaClass" `
-
-`	       jarfile-location="myLibrary.jar"/>
-
+```XML
+<javaclass id="MyJavaResource" classname="MyJavaClass" />
+```
 #### spring resource.
 
 This tag is used to specify the Spring context as resource. The possible attribute is:
@@ -2097,22 +1912,16 @@ This tag is used to specify the bean in the Spring context. The possible attribu
 
 
 Example:
-
+```XML
 <spring config-files="spring-context1.xml, spring-context2.xml">
-
-`	<spring-bean id="myBean" bean="beanName">
-
-`	<spring-bean id="myBean2" bean="beanName2">
-
+  <spring-bean id="myBean" bean="beanName">
+  <spring-bean id="myBean2" bean="beanName2">
 </spring>
-
 <spring use-web-config="true”>
-
-`	<spring-bean id="myBean" bean="beanName">
-
-`	<spring-bean id="myBean2" bean="beanName2">
-
+	<spring-bean id="myBean" bean="beanName">
+	<spring-bean id="myBean2" bean="beanName2">
 </spring>
+```
 
 ### 4.8. Adapters
 
@@ -2149,39 +1958,24 @@ The possible attributes for an adapter are:
 
 
 Basic example:
-
+```XML
 <integration-tier>
-
       <services>
-
    	     <service resource-ref="vehicle" id="vehicleResource">
-
    	           <method id="fetchVehicles" name="fetchVehicles">
-
    	                 <out name="vehicle_out" adapter="car"/>
-
    	           </method>
-
    	     </service>
-
       </services>
-
       <adapters>
-
-         <adapter id="car" type="CarAdapter" class="com.qualogy.qafe.vehicle.car">
-
+      <adapter id="car" type="CarAdapter" class="com.qualogy.qafe.vehicle.car">
                   <attribute name="carName" ref="name"/>
-
                   <attribute name="carType" ref="type"/>
-
                   <attribute name="passengersCount" ref="capacity"/>
-
          </adapter>
-
       </adapters>
-
 </integration-tier>
-
+```
 The above code snippet adapts the output object of fetchVehicles method. The key of output  mentioned using ref attribute in the adapter attribute tag will be adapted to the text mentioned as value for name in the attribute tag.
 
 An adapter can consist of attributes or nested adapters. The possible attributes for an attribute tag are:
@@ -2239,118 +2033,78 @@ Possible attributes for a nested adapter are:
   </tr>
 </table>
 
-
+```XML
 <adapters>
-
-<adapter type="" id="" adapt-all="false" class="" extends="">
-
-<attribute name="" ref="" adapter="" default="" type=""/>
-
-<adapter type="" attribute="" adapt-all="false" class=""`
-
-` extends="" id=""/>
-
-</adapter>
-
+	<adapter type="" id="" adapt-all="false" class="" extends="">
+		<attribute name="" ref="" adapter="" default="" type=""/>
+		<adapter type="" attribute="" adapt-all="false" class="" extends="" id=""/>
+	</adapter>
 </adapters>
+```
 
 The adapter can also be used if you want to pass a list of objects to stored-procedures, see the following example:
 
 - Define the EMP_OBJECT object in the database:
-
-`CREATE OR REPLACE TYPE EMP_OBJECT AS OBJECT (`
-
-`    "EMPNO" NUMBER(4,0),`
-
-`    "ENAME" VARCHAR2(10 BYTE),`
-
-`    "JOB"   VARCHAR2(9 BYTE),`
-
-`    "MGR"   NUMBER(4,0),`
-
-`    "HIREDATE" DATE,`
-
-`    "SAL"    NUMBER(7,2),`
-
-`    "COMM"   NUMBER(7,2),`
-
-`    "DEPTNO" NUMBER(2,0),`
-
-`    CONSTRUCTOR FUNCTION  EMP_OBJECT  RETURN SELF AS RESULT`
-
-`);`
-
+```
+`CREATE OR REPLACE TYPE EMP_OBJECT AS OBJECT (
+    "EMPNO" NUMBER(4,0),
+    "ENAME" VARCHAR2(10 BYTE),
+    "JOB"   VARCHAR2(9 BYTE),
+    "MGR"   NUMBER(4,0),
+    "HIREDATE" DATE,
+    "SAL"    NUMBER(7,2),
+    "COMM"   NUMBER(7,2),
+    "DEPTNO" NUMBER(2,0),
+    CONSTRUCTOR FUNCTION  EMP_OBJECT  RETURN SELF AS RESULT
+);
+```
 - Define the EMP_ARRAY collection of the EMP_OBJECT object in the database:
 
-`CREATE OR REPLACE TYPE EMP_ARRAY AS TABLE OF EMP_OBJECT;`
+``CREATE OR REPLACE TYPE EMP_ARRAY AS TABLE OF EMP_OBJECT;``
 
 - Define the SUMSALARYOFEMPLOYEES* *stored-procedure to use the collection and/or object as in and/or out parameters:
 
-`CREATE OR REPLACE PROCEDURE SUMSALARYOFEMPLOYEES(`
-
-`	EMPLOYEES IN OUT EMP_ARRAY, EMPLOYEE IN OUT EMP_OBJECT`
-
-`, TOTALSALARY OUT NUMBER)`
-
-`IS`
-
-`BEGIN`
-
-`  TOTALSALARY := 0;`
-
-`  FOR i IN 1..EMPLOYEES.COUNT LOOP`
-
-`    TOTALSALARY := TOTALSALARY + NVL(EMPLOYEES(i).SAL, 0);    `
-
-`  END LOOP;`
-
-`END;`
-
+```
+CREATE OR REPLACE PROCEDURE SUMSALARYOFEMPLOYEES(
+	EMPLOYEES IN OUT EMP_ARRAY, EMPLOYEE IN OUT EMP_OBJECT, TOTALSALARY OUT NUMBER) IS
+BEGIN
+  TOTALSALARY := 0;
+  FOR i IN 1..EMPLOYEES.COUNT LOOP
+    TOTALSALARY := TOTALSALARY + NVL(EMPLOYEES(i).SAL, 0);    
+  END LOOP;
+END;
+```
 - Implement the QAML code:
 
+```XML
 <integration-tier>
-
       <services>
-
          <service resource-ref="myResource" id="myService">
+   			<method id="sumSalaryOfEmployees" name="sumSalaryOfEmployees">
+			    <in name="EMPLOYEES" adapter="arrayOfEmp"/>
+		        <in name="EMPLOYEE"/>
+				<out name="EMPLOYEES" ref="EMPLOYEES adapter="arrayOfCompactEmp"/>
+				<out name="EMPLOYEE" ref="EMPLOYEE"/>
+				<out name="TOTALSALARY" ref="TOTALSALARY"/>	
+			</method>
+		 </service>
+	</services>
 
-   	<method id="sumSalaryOfEmployees" name="sumSalaryOfEmployees">
-
-   	    <in name="EMPLOYEES" adapter="arrayOfEmp"/>
-
-`        <in name="EMPLOYEE"/>
-
-    <out name="EMPLOYEES" ref="EMPLOYEES adapter="arrayOfCompactEmp"/>
-
-`  <out name="EMPLOYEE" ref="EMPLOYEE"/>
-
-   	    <out name="TOTALSALARY" ref="TOTALSALARY"/>
-
-   	 </method>
-
-          </service>
-
-      </services>
-
-      <adapters>
-
-         <adapter id="arrayOfEmp" adapt-name="EMP_ARRAY" adapt-all="true"/>
-
-         <adapter id="arrayOfCompactEmp" adapt-name="EMP_ARRAY" adapt-all="false">
-
-            <attribute name="EMPNO" ref="EMPNO"/>
-
-            <attribute name="ENAME" ref="ENAME"/>
-
-         </adapter>
-
+    <adapters>
+       <adapter id="arrayOfEmp" adapt-name="EMP_ARRAY" adapt-all="true"/>
+       <adapter id="arrayOfCompactEmp" adapt-name="EMP_ARRAY" adapt-all="false">
+	     <attribute name="EMPNO" ref="EMPNO"/>
+         <attribute name="ENAME" ref="ENAME"/>
+       </adapter>
       </adapters>
-
 </integration-tier>
+```
 
+```XML
 <call id="sumSalaryOfEmployees" call-name="sumSalaryOfEmployees" `
+```
 
-`sql="{call sumSalaryOfEmployees(?,?,?)}"/>
+``sql="{call sumSalaryOfEmployees(?,?,?)}"/>``
 
 Note:
 
@@ -2362,36 +2116,28 @@ As per the need, the transaction behavior can be set in the following order:
 
 * In order to apply transaction behavior to all the applications (globally) a classpath property called 'global.transaction.behavior' can be declared. Add the following line to the application-config.xml file enables this.
 
-`	<configuration name="global.transaction.behaviour" `
-
-`	               value="global.transaction.behaviour"/>
+``	<configuration name="global.transaction.behaviour" value="global.transaction.behaviour"/>``
 
 * In order to apply transaction behavior to one application a configuration property called 'global.transaction.behaviour' in the application context file (this property is equal to the global property, but will be only applicable within the context of an application)
 
 * In order to apply transactional behaviour to one business action, management properties on each individual business action have to be declared. An extra tag in the body of the business-action specifies what kind of transaction is needed:
 
-
+```XML
 <business-action id="localTransaction">
       <transaction managed="local" />
-`      ...`
+      ...
 </business-action>
-
+```
     * Applying to one business action again but using wild-cards in the context file. In the below mentioned example the specified transaction behavior applies to all business actions. Patterns to match certain business actions can be specified following this method.
-	   
 
-`			<application>
-
-				<transaction>
-
-			        	<business-action id="" managed="local"   `
-
-`                              isolation="default"`
-
-`	  	                  propagation="required" timeout="0" />
-
-				</transaction>
-
-`			</application>	`
+```XML
+<application>
+	<transaction>
+        	<business-action id="" managed="local"  isolation="default"
+ 	                  propagation="required" timeout="0" />
+		</transaction>
+</application>	
+```
 
 The managed attribute can have the following values:
 
@@ -2490,24 +2236,18 @@ Note that transaction synchronization is not available within a propagation="
 Unfortunately, every software application has to deal with exceptions, errors, bugs, warnings, etc. Any exception that is thrown from a service method call is already captured and shown to the user on the front-end. This is of course not always desirable. For that reason QAFE includes a special mechanism for handling exceptions.
 
 First of all, assume the following method in a Java class:
+```java
 
-	`package com.qualogy.qafe.gwt.standalone;`
-
-`    public class MyClass {`
-
-`		public int nextInt(){`
-
-`			throw new IllegalArgumentException("MyClass illegal....");`
-
-`		}`
-
-`	    public float nextFloat(){`
-
-`			return 0;`
-
-`		}`
-
-`	}`
+package com.qualogy.qafe.gwt.standalone;
+   public class MyClass {
+		public int nextInt(){
+			throw new IllegalArgumentException("MyClass illegal....");
+		}
+	    public float nextFloat(){`
+			return 0;
+		}
+}
+```
 
 As one can see, the nextInt method throws an IllegalArgumentException. When this method is invoked from QAFE, the exception will be shown on the screen in a default error box.
 
@@ -2516,31 +2256,22 @@ If you want your own exception handling, then there are a couple of steps to tak
 First of all, in the integration-tier, there is a possibility to define errors that can occur because a service method was invoked. The way to do this is as follows:
 
 Basic example:
-
+```XML
 <integration-tier>
 
 .........
 
-`	<errors>
-
-`	<error id="nameAlreadyRegistered" exception="java.lang.Exception">
-
-`	<log>The name was already registered</log>
-
-`	</error>
-
-`	<error id="illegalArgumentException" `
-
-`		   exception="java.lang.IllegalArgumentException">
-
-`	<log>Message from QAFE illegalargument thrown</log>
-
-`	</error>
-
-`    </errors>
-
+	<errors>
+	<error id="nameAlreadyRegistered" exception="java.lang.Exception">
+	<log>The name was already registered</log>
+	</error>
+	<error id="illegalArgumentException" 
+		   exception="java.lang.IllegalArgumentException">
+	<log>Message from QAFE illegalargument thrown</log>
+	</error>
+    </errors>
 </integration-tier>
-
+```
 As we can see here, there is a section "errors" in the integration-tier. This contains several error definitions. Each error has an id, exception and log entry (as child element). The log message is for internal use only: When an error is thrown and the error type is found as declared in the exception attribute, QAFE then adds all the information of the declared log attributes (if any) in the log file.
 
 The attributes for an error are:
@@ -2564,56 +2295,40 @@ The next step is to define the part where the error-handling will result in acti
 In the body of an *event *and *business-action* it's possible to define the <error-handler> tag.
 
 Here's an example:
-
+```XML
 <events>
-
 	<event>
-
 		<listeners>
-
 			<listenergroup>
-
 				<component ref="mylabel" />
-
 				<listener type="onclick" />
-
-			</listenergroup>
-
+			</listenergroup>	
 		</listeners>
-
 		<business-action ref="nextInt" />
-
 	   <error-handler id="illegalArgument" error-ref="illegalArgumentException"
-
 	                                 final-action="swallow">
-
                 <dialog type="error">
-
         	        <title value="My Error Dialog"/>
-
             	    <message ref="$ERROR_MESSAGE"/>
-
                  </dialog>
-
 	    </error-handler>
-
 	</event>
-
 </events>
+```
 
 This is an event that listens to an "onclick" event and executes a business-action. Assume that the other tiers are also implemented to execute the nextInt method. This business-action will eventually invoke the method that we defined in the Java class above.
 
-The interesting part here is the error-handler. The error-handler has an id (any value) and an error-ref. This error-ref refers to one of the *errors* defined in the* integration-tier*.
+The interesting part here is the error-handler. The error-handler has an id (any value) and an error-ref. This error-ref refers to one of the ``errors`` defined in the* integration-tier*.
 
-The final action is actually quite interesting. The possible values are "swallow*" or "rethrow*". When swallow is selected, the exception that is thrown (defined by the *error-ref*) will be absorbed by QAFE and the body of the error-handler will be added to the list of built-ins that are to be executed on the client.  In case of rethrow, the body of the error-handler will not be processed, and the error will be shown in the default error dialog if no error-handlers can handle the error in the parent event, if present.
+The final action is actually quite interesting. The possible values are ``swallow`` or ``rethrow``. When swallow is selected, the exception that is thrown (defined by the ``error-ref``) will be absorbed by QAFE and the body of the error-handler will be added to the list of built-ins that are to be executed on the client.  In case of rethrow, the body of the error-handler will not be processed, and the error will be shown in the default error dialog if no error-handlers can handle the error in the parent event, if present.
 
-Of course the body of an error-handler can call business-actions etc. Depending on which type (*event *or *business-action*) it is, so the possibilities are similar to the body of the type (*event *or business-action). In this case, all the possible built-ins belonging to an event can be used here.
+Of course the body of an error-handler can call business-actions etc. Depending on which type (``event`` or ``business-action``) it is, so the possibilities are similar to the body of the type (``event`` or ``business-action``). In this case, all the possible built-ins belonging to an event can be used here.
 
-In this example, an exception is thrown by the business-action call. Since the exception can be found in the error definition, the *error-handler* with id="illegalArgument" will be executed. This exception is "swallowed" and the body of this error-handler (dialog built-in) will be added to the methods that needs to be executed on the client. 
+In this example, an exception is thrown by the business-action call. Since the exception can be found in the error definition, the ``error-handler`` with ``id="illegalArgument`` will be executed. This exception is ``swallowed`` and the body of this error-handler (dialog built-in) will be added to the methods that needs to be executed on the client. 
 
-In the datastore the value of the error message is stored, so using the "$ERROR_MESSAGE" key you will get the error message back.
+In the datastore the value of the error message is stored, so using the ``$ERROR_MESSAGE`` key you will get the error message back.
 
-The end result is that you will see a dialog with "My Error Dialog" as the title and $ERROR_MESSAGE as the message. 
+The end result is that you will see a dialog with "My Error Dialog" as the title and ``$ERROR_MESSAGE`` as the message. 
 
 The attributes for an error-handler are:
 
