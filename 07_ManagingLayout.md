@@ -19,10 +19,3 @@
 ##7.9. Accordion
 
 ##7.10. AbsoluteLayout
-
-##7.11. CssLayout
-
-##7.12. Layout Formatting
-
-##7.13. Custom Layouts
-
