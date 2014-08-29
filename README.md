@@ -4,7 +4,6 @@
 * [Getting started](02_GettingStarted.md)
 * [QAFE Basics](03_QAFEBasics.md)
 * [Writing Web Applications](04_WritingWebApplications.md)
-* [BindingComponentsToData](09_BindingComponentsToData.md)
 * [Advanced Web Application Topics](11_AdvancedWebApplicationTopics.md)
 
 
