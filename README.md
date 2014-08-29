@@ -4,7 +4,7 @@
 * [Getting started](02_GettingStarted.md)
 * [QAFE Basics](03_QAFEBasics.md)
 * [Writing Web Applications](04_WritingWebApplications.md)
-* [Advanced Web Application Topics](11_AdvancedWebApplicationTopics.md)
+* [Advanced Web Application Topics](05_AdvancedWebApplicationTopics.md)
 
 #### Free training material
 
