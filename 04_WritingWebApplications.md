@@ -193,11 +193,11 @@ Example Code:
 </events>
 ```
 
-##### 5.2.2 Built-Ins
+#####  Built-Ins
 
 Built-Ins include business actions, control statements and other dynamic changes. BuildIns are usually declared in event definitions. The process that needs to be executed when an event occurs is specified using built in functions.
 
-###### 5.2.2.1 Business Actions
+######  Business Actions
 
 Reference to a defined business action. It can be specified using the `<business-action>` tag. This results in the execution of the business action. Parameters can be passed to a business action using the `<in>` tag and output can be collected as a result of the business action execution in the `<out>` tag. Multiple `<in>` tags are used to pass more than one parameters. The `<in>` and `<out>` tags can have the following attributes
 
@@ -284,7 +284,7 @@ QAFE has an internal variable $COUNT which can be set to datastore such that the
 </event>        
 ```
 
-###### 5.2.2.2 Control Statements
+######  Control Statements
 
 Besides business actions, control statements can be used as part of event execution. Control statements can also be part of business definition. Supported control statements are if, for and switch.
 
@@ -474,7 +474,7 @@ Usage of _not_
 ```
 Further python expressions can be refered [here](http://docs.python.org/reference/expressions.html).
 
-##### 5.2.3 Reusable events
+#####  Reusable events
 
 The events that are defined can be reused. The attribute *id *of an event is used to refer the event from another part of the code. The event will be executed irrespective of the listener specified in the referencing event.
 
@@ -505,9 +505,9 @@ The events that are defined can be reused. The attribute *id *of an event is use
 ```
 In the above code the event with id as myEventOne is referenced as a part of event execution in myEventTwo.
 
-##### 5.2.4 common Built-Ins
+#####  common Built-Ins
 
-###### 5.2.4.1 <set>
+######  <set>
 
 The `<set>` tag is used to set values to a particular component dynamically. Following are the attributes for set tag
 
@@ -577,7 +577,7 @@ Rules applied while setting a value to a component:
 
     * container component (like a Panel): the value  or ``displayname`` of all child components with the name attribute will be set. 
 
-###### 5.2.4.2 `<store>`
+######  ``<store>``
 
 The store tag acts like the concept of session in an application. The store tag in QAFE can retain data in local and global scope according to the target specification. If the target is specified as pipe then it represents local scope for the data stored and the variable will only be available within an event. If the target is specified as user, then the data will be available across the events and across windows in the same application. Following are the attributes of `<store>`
 
@@ -625,7 +625,7 @@ usage is as follows:
 
 `<store name="varName" ref="myComponent" src="pipe" target="pipe"/>`
 
-###### 5.2.4.3 - `<store-clear>`
+######  ``<store-clear>``
 
 When store tag is used to maintain data in global scope, the QAML developer have to make sure that the data is removed after use. This can be done using the store-clear tag. Clearing of the data from the global scope can be triggered through appropriate events like onunload.
 
@@ -649,9 +649,9 @@ Following are the attributes of `<store-clear>`
 </table>
 
 
-##### 5.2.5 Other Builtins
+#####  Other Builtins
 
-###### 5.2.5.1 `<authenticate>`
+######  `<authenticate>`
 
 The `<authenticate>` tag is used to authorize log ins. The reference to the business action which takes care of the authentication process is mentioned as the ``ref`` attribute of the tag. The username and password are passed as parameters to the referenced business action. The `<username>` and the `<password>` tag can have attributes same as the `<in>` tags used in `<business-action>`
 
@@ -662,7 +662,7 @@ The `<authenticate>` tag is used to authorize log ins. The reference to the busi
 </authenticate>
 ```
 
-###### 5.2.5.2 `<clear>`
+######  `<clear>`
 
 The `<clear>` tag is used to clear the values of the component. The reference of the component whose value needs to be cleared is mentioned as ``ref`` attribute of the tag as shown below. 
 
@@ -690,26 +690,26 @@ Rules applied for clearing:
 
     * a container component (like a Panel): the ``value`` or ``displayname`` of all child components with the name attribute will be cleared 
 
-###### 5.2.5.3 `<closewindow>`
+###### `<closewindow>`
 
 The `<closewindow>` tag is used to close a window. The ``ref``attribute of the tag is used to specify the window id corresponding to the window that needs to be closed. Usage is as follows
 ```XML
 <closewindow ref="myWindowId"/>
 ```
-###### 5.2.5.4 `<comments>`
+######  `<comments>`
 
 As the name suggests, the tag is used to introduce comments in the code. Usage is as follows
 ```XML
 <comments><![CDATA[Text that is needed to be the comment]]></comments>
 ```
-###### 5.2.5.5 `<copy>`
+######  `<copy>`
 
 This tag is used to copy value of one component to another. Usage is as shown.
 ```XML
 <copy from="sourceComponentId" to="destinationComponentId"/>
 ```
 
-###### 5.3.5.6 `<dialog>`
+######  `<dialog>`
 
 This tag is used to display dialog box if and when required. The tag must have the title and message properties defined. The message can have values of component by using variables declared in ``placeholder`` or ``store`` tags.
 
@@ -719,7 +719,7 @@ This tag is used to display dialog box if and when required. The tag must have t
 	<message value="Message shown in the dialog box"/>
 </dialog>
 ```
-###### 5.3.5.7 `<error-handler>`
+######  `<error-handler>`
 
 This tag is used as an exception handler. Services which are expected to cause exceptions are declared inside the `<error-handler>` tag. An Error handler tag can have the following attributes.
 
@@ -745,13 +745,13 @@ This tag is used as an exception handler. Services which are expected to cause e
 	</service>
 </error-handler>
 ```
-###### 5.3.5.8 `<focus>`
+######  `<focus>`
 
  This tag is used to set cursor focus on a particular component
 ```XML
 <focus ref="myComponentId"/>
 ````
-###### 5.3.5.9 `<logout>`
+######  `<logout>`
 
 The logout tag is used to sign out from the current authenticated session. The ``confirmation-required`` attribute can have true or false value. A true value as for confirmation before logging out. Usage is as follows.
 
@@ -759,7 +759,7 @@ The logout tag is used to sign out from the current authenticated session. The `
 <logout confirmation-required="true"/>
 ```
 
-###### 5.3.5.10 `<openwindow>`
+######  `<openwindow>`
 
 Further windows can be opened as internal window to QAFE or as an external window using this tag. Attributes of `<openwindow>` tag are as follows.
 
@@ -863,7 +863,7 @@ In the destination window the data passed using the above code snippet can be fe
 ```XML
 <set component-id="componentId" ref="varName" src="user"/>
 ```
-###### 5.3.5.11 `<set-panel>`
+######  `<set-panel>`
 
 The `<set-panel>` tag is used to dynamically replace an existing panel with another one defined using `<panel-definition>` tag. Usage is as follows.
 ```XML
@@ -872,7 +872,7 @@ The `<set-panel>` tag is used to dynamically replace an existing panel with anot
 
 ``sourcePanel`` is the id of the replacing panel and targetPanel is the id of the panel being replaced.
 
-###### 5.2.5.12 `<set-property>`
+######  `<set-property>`
 
 In order to dynamically set some properties of components the `<set-property>` tag can be used. The properties that can be dynamically set are ``currentpage, displayname, editable, enabled, width, height, selected-row, title, tooltip, visible`` and ``width``. Depending on the property, the value attribute of the `<set-property>` tag can be an integer, a boolean or a string. More than one component can be set with same property using a single `<set-property>` tag Usage is as follows.
 
@@ -884,7 +884,7 @@ In order to dynamically set some properties of components the `<set-property>` t
   .
 </set-property>
 ```
-###### 5.2.5.13 `<toggle>`
+######  `<toggle>`
 
 This tag is almost same as `<set-property>`, but instead of specifying a particular property this tag uses the type of the component, identifies the property that can be toggled and toggles them automatically. E.g.; If toggle tag is used on a button which has been enabled then after toggle it will be disabled. Multiple components can be mentioned simultaneously to toggle. Usage is as follows.
 ````XML
@@ -892,7 +892,7 @@ This tag is almost same as `<set-property>`, but instead of specifying a particu
   <component ref="myComponentId"/>
 </toggle>
 ```
-###### 5.2.5.14 `<validate>`
+######  `<validate>`
 
 This tag is used to validate the value of a referenced component against a regular expression. The message shown as a result of validation is specified using the message attribute in the `<validate>` tag.
 
@@ -904,7 +904,7 @@ This tag is used to validate the value of a referenced component against a regul
 	</regexp>
 </validate>
 ```
-###### 5.2.5.15 `<change-style>`
+######  `<change-style>`
 
 This tag is used to dynamically change the style of a particular component. The id of the component is given as the reference and the `<style-action>` tag is used to set the class for the component. The class has to be defined in the css file. Usage is as follows.
 
@@ -916,7 +916,7 @@ This tag is used to dynamically change the style of a particular component. The 
   <style-action action="set" style="styleClassName"/>
 </change-style>
 ```
-###### 5.2.5.16 `<show-panel>`
+######  `<show-panel>`
 
 This tag is used to have a pop-up behavior using contents defines using panel-definition tag. QAFE developers can specify x and y coordinates as attributes to the built-in and the panel will open up in that position. If x and y coordinates are not mentioned then the panel will open up at a position with respect to the component  triggering the event. It is also possible for the qafe developers to use attributes to manage the auto-hide and modal properties of the panel.
 
@@ -987,14 +987,14 @@ Usage of show-panel built-in is as follows
 
 </presentation-tier>
 ```
-###### 5.2.5.17 `<close-panel>`
+######  `<close-panel>`
 
 This tag is used to close a panel invoked using show-panel built-in. If show-panel built-in is called in an event with auto-hide as false then in order to remove it from the browser qafe developer need to use the close-panel built-in. Usage is as follows
 ```XML
 <close-panel ref="panelDefinitionId"/>
 ```
 
-### 5.3 Multilingual Support
+###  Multilingual Support
 
 For Internationalization (i18n) we use ``messages``. One can specify a combination of ISO Language Code and ISO Country Code (or only ISO Language Code) to define values for a specific language.
 
@@ -1059,7 +1059,7 @@ Note: Consider the scenario where the format of the locale is without country co
     </autolayout>
 </panel>
 ```
-### 5.4 Styling
+###  Styling
 
 UI appearance in QAFE can be controlled using style sheets. The ``class`` and  ``style`` attribute associated with the component tag can be used to serve this purpose. Users can define their own style sheets and include it in the QAML file using the `<styles></styles>`tag. The ``styles`` tag is specified in the presentation tier as follows.
 ```XML
@@ -1073,7 +1073,7 @@ Style classes defined in a style sheet can be used in the ``class`` attribute of
 
 There are style classes which are commented out in qafe-gwt.css. Those classes can be uncommented, modified and used if we want to override the default style classes being used.
 
-### 4.5. Business Actions
+###  Business Actions
 
 Every application has business logic. Business actions are used to specify the business logic that has to be executed. In QAFE, business actions forms the glue between the GUI components and the logic. The possible attributes for a business action are:
 
