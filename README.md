@@ -4,7 +4,6 @@
 * [Getting started](02_GettingStarted.md)
 * [QAFE Basics](03_QAFEBasics.md)
 * [Writing Web Applications](04_WritingWebApplications.md)
-* [Managing Layout](07_ManagingLayout.md)
 * [Styling](08_Styling.md)
 * [BindingComponentsToData](09_BindingComponentsToData.md)
 * [QAFE Database Resource](10_QAFEDatabaseResource.md)
