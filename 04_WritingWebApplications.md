@@ -1357,7 +1357,7 @@ Basic example:
 	     <drivermanager-datasource id="MyDatasourceID" 
    	       statements-file-url="statements.xml" 
 	         url="jdbc:oracle:thin:@127.0.0.1:1521:XE
-	         username="apps" `
+	         username="apps" 
 	         password="apps" 
 	         driver-classname="oracle.jdbc.driver.OracleDriver" />
       </resources>
@@ -1403,7 +1403,7 @@ Basic example:
 In order to access the database, SQL statements are composed in a separate file in XML format. This has to be referenced in the resources tier. A basic example of the content of this file is as follows:
 ```XML
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-   <statements xmlns="http://qafe.com/schema"`
+   <statements xmlns="http://qafe.com/schema"
 	  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://qafe.com/schema 
 			 http://www.qafe.com/schema/application-statements.xsd">
@@ -1422,8 +1422,8 @@ In order to access the database, SQL statements are composed in a separate file 
 ```
 #### Function Call Example:
 	    Database:
-```SQL
-    * function get_ename(p_empno in emp.empno%type)  return emp.ename%type
+```sql
+     function get_ename(p_empno in emp.empno%type) return emp.ename%type
 ```
 
 ```XML
@@ -1448,7 +1448,7 @@ In order to access the database, SQL statements are composed in a separate file 
 		<resources>
 			<drivermanager-datasource id="dbResource"  
 				statements-file-url="statements.xml"  
-				url="jdbc:oracle:thin:@127.0.0.1:1521:XE" ` username="apps"  
+				url="jdbc:oracle:thin:@127.0.0.1:1521:XE"  username="apps"  
 				password="apps"   driver-classname="oracle.jdbc.driver.OracleDriver" />
 		</resources>
 	</resource-tier>
@@ -1489,8 +1489,8 @@ In order to access the database, SQL statements are composed in a separate file 
 #### Procedure Call Example
 
 Database:
-```SQL
-    *  procedure get_ename(p_empno in emp.empno%type, p_ename out emp.ename%type)
+```sql
+    * procedure get_ename(p_empno in emp.empno%type, p_ename out emp.ename%type)
 ```
 ```XML
  
@@ -1563,7 +1563,7 @@ Database:
 
 #### Calling procedures with Oracle Object type as IN/OUT:
 
-	Suppose the database contains a procedure with Object TYPE as in/out variable.
+Suppose the database contains a procedure with Object TYPE as in/out variable.
 
 database type.
 ```
@@ -1585,7 +1585,7 @@ In statements file add this entry.
 
 ##### Passing input as a Map containing the attributes.
 
-For eg:
+For example:
 ```XML
    <textfield  name="LINE_ID" group-name="LNE_TYP" />
    <textfield  name="HEADER_ID" group-name="LNE_TYP" />
@@ -1710,9 +1710,7 @@ Statement type definitions can be found on the following page: [http://www.qafe
 </table>
 
 
-* With id and table attribute
-
-		_eg;_
+* With id and table attribute for example
 ```XML
 <update id="myUpdate" table="TABLE_NAME"/>
 ```
@@ -1722,11 +1720,11 @@ In case of Collection object being passed as input paramter the key of Map insid
 
 * With sql query Attribute. If sql attribute is used in update tag, then the other attributes of the tag are ignored and the sql statement mentioned inside the attribute is executed.
 
-		_Note:_ Sql statement provided in the attribute must be valid.
+> SQL statement provided in the attribute must be valid.
 
 _		    eg;_
 ```XML
-<update id="myUpdate"` `sql="update TABLE_NAME set <COLUMN_NAME>=:<refVarName>, <COLUMN_NAME>=:<refVarName> .... where <COLUMN_NAME>=:<refVarName>"/>
+<update id="myUpdate" sql="update TABLE_NAME set <COLUMN_NAME>=:<refVarName>, <COLUMN_NAME>=:<refVarName> .... where <COLUMN_NAME>=:<refVarName>"/>
 ```
 In case of parameters being passed as simple data types, the reference variable mentioned in ``<method>`` and the variable name used in the sql statement should be same.
 
@@ -1734,15 +1732,11 @@ If Map data type is used as input parameter then the key in the map should match
 
 In case of Collection object being passed as input parameter the key of Map inside the Collection object should match with the reference variable name in the sql statement.
 
-* With value being provided directly. 
-
-		_eg;_
+* With value being provided directly, for example:;
 ```XML
 <update id="myUpdate" sql="update TABLE_NAME set <COLUMN_NAME>=<value>, <COLUMN_NAME>=<value>, ...." where="<COLUMN_NAME>=<value>"/>
 ```
-* With table and where attribute mentioned
-
-		_eg;_
+* With table and where attribute mentioned, for example
 ```XML
 <update id="myUpdate" table="QAFE_TEST_UPDATE" where="ID > :ID and ADDRESS=:ADDRESS"/>
 ```
@@ -1774,26 +1768,20 @@ When where attribute is used along with table name specified in update tag witho
 
 * In case of parameters being passed to a select tag from integration tier, it can be of simple data types or a Map. In case of simple data types the reference variable name used must be same as that of the column name in ``TABLE_NAME``. If Map data type is used as input parameter then the keys in the map should be same as that of the column names in ``TABLE_NAME``.
 
-* With id and table attribute
-
-		_eg;_
+* With id and table attribute, for example
 ```XML
  <select id="mySelect" table="TABLE_NAME"/>
 ```
-Referencing the above mentioned example without passing any input parameter from integration tier will result in ``query *`select * from TABLE_NAME``
+Referencing the above mentioned example without passing any input parameter from integration tier will result in  ``query *select * from TABLE_NAME``
 
-If parameters are passed as inputs that will be used to create the where clause. 
-
-  _eg;_  if you pass column1  as the input with value ABC then the query formed will be* *
+If parameters are passed as inputs that will be used to create the where clause. For example,   if you pass column1  as the input with value ABC then the query formed will be:
 ```XML
 
 select * from TABLE_NAME where column1='ABC*'
 ```
-* With sql query Attribute. If sql attribute is used in select tag, then the other attributes of the tag are ignored and the sql statement mentioned inside the attribute is executed.       
-
-_		    eg;_ 
+* With sql query Attribute. If sql attribute is used in select tag, then the other attributes of the tag are ignored and the sql statement mentioned inside the attribute is executed, for example:
 ```XML
-<select id="mySelect"` `sql="slect COLUMN_NAME from TABLE_NAME where COLUMN_NAME=:refVarName"/> `
+<select id="mySelect" sql="slect COLUMN_NAME from TABLE_NAME where COLUMN_NAME=:refVarName"/> `
 ```
 - refVarName `should be passed as the input to replace the placeholder.    
 
@@ -1825,27 +1813,21 @@ _		    eg;_ 
 
 * In case of parameters being passed to a delete tag from integration tier, it can be of simple data types or a Map. In case of simple data types the reference variable name used must be same as that of the column name in ``TABLE_NAME``. If Map data type is used as input parameter then the keys in the map should be same as that of the column names in ``TABLE_NAME``.
 
-* With id and table attribute
-
-		_eg;_ 
+* With id and table attribute, for example
 ```XML
 <delete id="myDelect" table="TABLE_NAME"/>
 ```
-Referencing the above mentioned example without passing any input parameter from integration tier will result in ``query *delete from TABLE_NAME `
+Referencing the above mentioned example without passing any input parameter from integration tier will result in ``query *delete from TABLE_NAME``
 
-If parameters are passed as inputs that will be used to create the where clause. 
-
-  _eg;_  if you pass column1  as the input with value ABC then the query formed will be* *
+If parameters are passed as inputs that will be used to create the where clause. For example, if you pass column1  as the input with value ABC then the query formed will be
 
 * ``delete from TABLE_NAME where column1='ABC*'``
 
-* With sql query Attribute. If sql attribute is used in delete tag, then the other attributes of the tag are ignored and the sql statement mentioned inside the attribute is executed.       
-
-_		    eg;_ 
+* With sql query Attribute. If sql attribute is used in delete tag, then the other attributes of the tag are ignored and the sql statement mentioned inside the attribute is executed. For example, 
 ```XML
 <delete id="myDelect"` `sql="delete from TABLE_NAME where COLUMN_NAME=:refVarName"/> `
 ```
-`- refV type here -Binu Badurudeen 9/2/11 4:07 PM arName `should be passed as the input to replace the placeholder.
+`- refVarName `should be passed as the input to replace the placeholder.
 
 * VPD. In QAFE is possible to access to the database via VPD (Virtual Private Database).
 
