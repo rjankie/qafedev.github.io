@@ -45,7 +45,7 @@ Indicate which view you want to use (form or list). The form view will show only
 ![qocaFormView](assets/images/qocaformview.png)
 
 The list view will show a number of records and a data overflow at the bottom.
-![qocaListView](assets\images\qocalistview.png)
+![qocaListView](assets/images/qocalistview.png)
 
 The number of columns indicate how many columns you want in your form view or in your data overflow. This number has to be a multitude of 2 since the labels for each field are also considered as columns.
 
