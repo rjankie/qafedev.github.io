@@ -19,7 +19,7 @@ In the Data Source Explorer-view right click the Database Connections and select
 Go to the Project Explorer and right click the folder of your application within the WEB-INF-folder. Select: `New` -> `Other...`
 Select QAML File from the list.
 
-![newQamlFile](assets\images\newqamlfile.png)
+![newQamlFile](assets/images/newqamlfile.png)
 
 
 Use the wizard to set up your new QAML file.
