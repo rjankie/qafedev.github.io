@@ -5,6 +5,7 @@
 * [QAFE Basics](03_QAFEBasics.md)
 * [Writing Web Applications](04_WritingWebApplications.md)
 * [Advanced Web Application Topics](05_AdvancedWebApplicationTopics.md)
+* [QAFE One Click Application](06_QafeOneClickApplication.md)
 
 #### Free training material
 
