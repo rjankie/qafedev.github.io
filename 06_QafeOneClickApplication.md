@@ -33,16 +33,16 @@ A new wizard is started to set up your application.
 The wizard will ask you to specify the different locations for each tier (presentation tier, business tier, integration tier and resource tier). You can insert all tiers in the same file, but this is however generally not recommended. For this example, it is fine to use the same QAML-file for all tiers, since the amount of code is still manageable.
 Within the resource tier you will have to specify the file in which the SQL statements are stored. This has to be an XML-file.
 
-![qocaResourceTier](assets\images\qocaresourcetier.png)
+![qocaResourceTier](assets/images/qocaresourcetier.png)
 
 After the resource tier you will be asked to fill in the file names and Service Ids of the integration and business tier.
 Finally you will be asked to define Service Methods.
 
-![qocaServiceMethods](assets\images\qocaservicemethods.png)
+![qocaServiceMethods](assets/images/qocaservicemethods.png)
 
 In this window you will be asked to set up your window. Select the table that you want to use in the top left.
 Indicate which view you want to use (form or list). The form view will show only one record from the database.
-![qocaFormView](assets\images\qocaformview.png)
+![qocaFormView](assets/images/qocaformview.png)
 
 The list view will show a number of records and a data overflow at the bottom.
 ![qocaListView](assets\images\qocalistview.png)
@@ -67,9 +67,9 @@ Linking several tables in a master-detail relation is very simple with QAFE. The
 
 In the Service Methods window you can indicate the master detail relations. See the example below, here we have one master table and two detail tables.
 
-![qocaMasterDetailSetup](assets\images\qocamasterdetailsetup.png)
+![qocaMasterDetailSetup](assets/images/qocamasterdetailsetup.png)
 
 It is best to start with the master window and configure this one first. After that you configure the first detail table. In the section `Master Relation` you indicate which column is used to link the tables. In our example the DetailEMPLOYEES list is made up of all employees for which the `DEPARTMENT_ID` is the same as the `DEPARTMENT_ID` of the department that is selected in the `detailDEPARTMENTS` table.
 
 Our example application will look like this:
-![qocaMasterDetailExample](assets\images\qocamasterdetailexample.png)
+![qocaMasterDetailExample](assets/images/qocamasterdetailexample.png)
