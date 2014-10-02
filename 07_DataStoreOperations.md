@@ -10,12 +10,12 @@ In order to be able to use and manipulate data in a QAFE application it needs to
 
 The table below shows the different *store types*. It indicates the scope of the store. For example the *window* scope means that as long as the window is active the variable stored in this store type is also available. The column *built-in* indicates which event built-in you have to use in order to assign a value to a variable stored in this store type.
 
- |Store type|Scope|Built-in|
- |----------|-----|--------|
- | pipe | event | store |
- | user | window | store |
- | global | application | store |
- | component | window | set |
+Store type | Scope | Built-in
+---|---|---
+pipe | event | store
+user | window | store
+global | application | store
+component | window | set
 
  In order to store a value in QAFE you will have to provide:
  - a name for the variable
