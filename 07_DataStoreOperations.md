@@ -2,7 +2,7 @@
 
 ![qafelogo](http://www.qafe.com/wp-content/themes/qafe2013/img/logo.png)
 
-## 7. Store procedures
+## 7. Data store operations
 
 ### 7.1 How to store and access data in QAFE applications
 
@@ -12,10 +12,10 @@ The table below shows the different *store types*. It indicates the scope of the
 
  |Store type|Scope|Built-in|
  |----------|-----|--------|
- |pipe|event|store|
- |user|window|store|
- |global|application|store|
- |component|window|set|
+ | pipe | event | store |
+ | user | window | store |
+ | global | application | store |
+ | component | window | set |
 
  In order to store a value in QAFE you will have to provide:
  - a name for the variable
