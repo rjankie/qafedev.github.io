@@ -6,9 +6,9 @@
 
 ### 7.1 How to store and access data in QAFE applications
 
-In order to be able to use and manipulate data in a QAFE application it needs to be stored somewhere. There are different ways of storing data and these will be dealt with in this chapter.
+In order to be able to use and manipulate data in a QAFE application, it needs to be stored somewhere. There are different ways of storing data, these will be dealt with in this chapter.
 
-The table below shows the different *store types*. It indicates the scope of the store. For example the *window* scope means that as long as the window is active the variable stored in this store type is also available. The column *built-in* indicates which event built-in you have to use in order to assign a value to a variable stored in this store type.
+The table below shows the different *store types*. It indicates the scope of the store. For example; the *window* scope means that as long as the window is active, the variable stored in this store type is also available. The column *built-in* indicates which event built-in you have to use in order to assign a value to a variable stored in this store type.
 
 Store type | Scope | Built-in
 ---|---|---
@@ -47,9 +47,9 @@ The following code provides an example of an event in which a variable is stored
 ```
 Since the scope of the pipe is the event, the variable "myVar" is cleared as soon as the event ends. In the case above the value of "myVar" is still available in the UI component "pipeStoreResult".
 
-Note that, instead of assigning a value to "myVar" directly, we have given it the value of a UI component. In this case the component is a text field, but it could be many other components types as well.
+Note: instead of assigning a value to "myVar" directly, we have given it the value of a UI component. In this case the component is a text field, but it could be many other components types as well.
 
-Also note that in the example above we use the set built-in. In this built in a value is stored in a (UI) component. Since the pipe store is the default source the tag 'src="pipe"' could have been left out of the QAML code.
+Also note that in the example above we use the set built-in. In this built in a value is stored in a (UI) component. Since the pipe store is the default source, the tag 'src="pipe"' could have been left out of the QAML code.
 
 ### 7.3 User storage
 
@@ -75,8 +75,8 @@ The scope of the user storage is the window. This store procedure can thus be us
     <set component-id="userStoreResult" src="user" action="set" ref="myVar"></set>
 </event>
 ```
-In the example above the variable "myVar" is assigned the value of the "storeTextFieldUser" textfield when the user clicks the button "storeButtonUser".
-When the user clicks the button "getStoresButton" the label "userStoreResult" is assigned the value of "myVar" form the user store.
+In the above example the variable "myVar" is assigned the value of the "storeTextFieldUser" textfield when the user clicks the button "storeButtonUser".
+When the user clicks the button "getStoresButton", the label "userStoreResult" is assigned the value of "myVar" form the user store.
 
 ### 7.4 Global storage
 
@@ -138,4 +138,4 @@ The QAML code example below shows a value that is stored in the global store. Th
 </presentation-tier>
 ```
 In this example the data in the textfield "storeTextFieldGlobal" is stored in the global store when the button "storeButtonGlobal" is clicked.
-The button "showGlobalStoreWindowButton" creates a new window when clicked. In this new window when the button "showGlobalStoreButton" is clicked the data that was stored before is shown in the label "globalStoreResult".
+The button "showGlobalStoreWindowButton" creates a new window when clicked. In this new window when the button "showGlobalStoreButton" is clicked, the data that was stored before is shown in the label "globalStoreResult".
