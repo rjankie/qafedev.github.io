@@ -5,7 +5,7 @@
 ### Customized Error Messages
 When contacting a data source, it is possible for something to go wrong. For example a null check is not done properly or a database constraint is violated. It is possible to fetch these exceptions and properly handle them in QAML. Underneath is an example on how to do this.
 
-In the presentation tier underneath, an onclick-event is available which saves some data to the database. During the database handlings, something can go wrong. a simple error-handler is defined underneath.  The error-ref refers to an error-handler that is defined in the integration-tier. The id is specified for reuse-purposes. The final-action determines how to handle the error. One way is to re-throw the exception to the screen. Another option is to swallow the exception and do other actions. Inside the error-handler, a dialog message is shown to the user in this case. Developers are free to write their own QAML-code within the error-handler.
+In the presentation tier underneath, an onclick-event is available which saves some data to the database. During the database handlings, something can go wrong. a simple error-handler is defined underneath.  The error-ref refers to an error-handler that is defined in the integration-tier. The id is specified for reuse-purposes. The final-action determines how to handle the error. One way is to re-throw the exception to the screen. Another option is to swallow the exception and do other actions. In this case, we show a dialog. Developers are free to write their own QAML-code within the error-handler.
 ```XML
 <presentation-tier>
 	<events>
