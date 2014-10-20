@@ -7,6 +7,7 @@
 * [Advanced Web Application Topics](05_AdvancedWebApplicationTopics.md)
 * [QAFE One Click Application](06_QafeOneClickApplication.md)
 * [Data store operations](07_DataStoreOperations.md)
+* [How-To Guides](08_HowTo.md)
 
 #### Free training material
 
