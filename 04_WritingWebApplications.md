@@ -5,6 +5,33 @@
 
 ## 4 Adding events your applications
 
+
+
+<!-- toc -->
+
+* [4 Adding events your applications](#4-adding-events-your-applications)
+  * [Multilingual Support](#multilingual-support)
+  * [Styling](#styling)
+  * [Business Actions](#business-actions)
+  * [Services](#services)
+  * [4.7. ResourceTier](#47-resourcetier)
+    * [Database](#database)
+    * [drivermanager-datasource resource.](#drivermanager-datasource-resource)
+    * [jndi-datasource resource.](#jndi-datasource-resource)
+    * [Statements file.](#statements-file)
+    * [Function Call Example:](#function-call-example)
+    * [Procedure Call Example](#procedure-call-example)
+    * [Calling procedures with Oracle Object type as IN/OUT:](#calling-procedures-with-oracle-object-type-as-inout)
+  * [Java](#java)
+    * [javaclass resource.](#javaclass-resource)
+    * [spring resource.](#spring-resource)
+  * [4.8. Adapters](#48-adapters)
+  * [Transactions](#transactions)
+  * [Exceptions](#exceptions)
+
+<!-- toc stop -->
+
+
 Events are used in order to associate actions to components. All the events that need to be defined are included in the *events* tag in QAML file.
 
 > There are global and local events. We focus now on local events. Local to the window that is.
