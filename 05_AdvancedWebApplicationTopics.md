@@ -4,6 +4,23 @@
 
 ## 5. Advanced Web Application Topics
 
+
+<!-- toc -->
+
+* [5. Advanced Web Application Topics](#5-advanced-web-application-topics)
+  * [Advanced configuration](#advanced-configuration)
+    * [Merging of XML files](#merging-of-xml-files)
+  * [Parameters passing](#parameters-passing)
+* [QAFE advanced configuration](#qafe-advanced-configuration)
+* [Accessing Businessactions using webservice](#accessing-businessactions-using-webservice)
+* [VPD usage in QFE application](#vpd-usage-in-qfe-application)
+* [JNDI](#jndi)
+  * [Jetty](#jetty)
+  * [Tomcat](#tomcat)
+* [Search operators usage](#search-operators-usage)
+
+<!-- toc stop -->
+
 ### Advanced configuration
 
 #### Merging of XML files
