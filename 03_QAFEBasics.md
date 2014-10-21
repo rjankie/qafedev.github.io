@@ -4,6 +4,15 @@
 
 ## 3. QAFE Basics
 
+
+<!-- toc -->
+
+* [3. QAFE Basics](#3-qafe-basics)
+  * [Starting point: application-config.xml](#starting-point-application-configxml)
+  * [The Anatomy of the application](#the-anatomy-of-the-application)
+
+<!-- toc stop -->
+
 ### Starting point: application-config.xml
 
 In the previous chapter the software for QAFE Development was installed. Then a simple project project was created and the QAFE HelloWorld application was shown at runtime.
