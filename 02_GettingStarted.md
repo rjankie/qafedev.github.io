@@ -4,6 +4,18 @@
 
 ## 2. Getting Started with QAFE
 
+
+<!-- toc -->
+
+* [2. Getting Started with QAFE](#2-getting-started-with-qafe)
+  * [2.1 Setting up the Development Environment](#21-setting-up-the-development-environment)
+    * [2.1.1 Hardware requirements](#211-hardware-requirements)
+    * [2.1.2 Software requirements](#212-software-requirements)
+  * [2.2 Creating your first QAFE Application](#22-creating-your-first-qafe-application)
+  * [2.3 Running  your first QAFE Application](#23-running-your-first-qafe-application)
+
+<!-- toc stop -->
+
 ### 2.1 Setting up the Development Environment
 QAFE Development is done in Eclipse. For the purpose of having a quickstart, we’ve provided an installer which installs Eclipse (Based on Oracle Enterprise Pack for Eclipse, OEPE 12, based on Eclipse 4.3) with all the necessary plug-ins. These installers are to be found on http://www.qafe.com/download
 
