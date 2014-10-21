@@ -4,6 +4,19 @@
 
 ## 1. Introduction: QAFE Core Platform
 
+
+<!-- toc -->
+
+* [1. Introduction: QAFE Core Platform](#1-introduction-qafe-core-platform)
+  * [1.1 What is QAFE?](#11-what-is-qafe)
+  * [1.2 Why QAFE ?](#12-why-qafe)
+  * [1.3  The global architecture](#13-the-global-architecture)
+  * [1.4 Presentation Framework](#14-presentation-framework)
+  * [1.5 The Business Framework](#15-the-business-framework)
+  * [1.6 Put it all together](#16-put-it-all-together)
+
+<!-- toc stop -->
+
 ### 1.1 What is QAFE?
 QAFE is a product from [Qualogy Solutions B.V](http://www.qualogy.com) and is an acronym for "Quality Application Framework for Enterprises".
 
