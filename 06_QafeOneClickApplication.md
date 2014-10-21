@@ -4,6 +4,19 @@
 
 ## 5. QAFE One Click Application
 
+
+<!-- toc -->
+
+* [5. QAFE One Click Application](#5-qafe-one-click-application)
+  * [5.1 Building a web application to access a database with a few clicks](#51-building-a-web-application-to-access-a-database-with-a-few-clicks)
+  * [5.2 Create a database connection](#52-create-a-database-connection)
+  * [5.3 Create a new window](#53-create-a-new-window)
+  * [5.4 Building and running your application](#54-building-and-running-your-application)
+  * [5.5 Using master-detail relations](#55-using-master-detail-relations)
+
+<!-- toc stop -->
+
+
 ### 5.1 Building a web application to access a database with a few clicks
 
 In this chapter we will create a web application to access and modify data from a database. Using QAFE, building such applications is easy.
