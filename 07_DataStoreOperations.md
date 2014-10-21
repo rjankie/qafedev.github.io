@@ -4,6 +4,18 @@
 
 ## 7. Data store operations
 
+
+<!-- toc -->
+
+* [7. Data store operations](#7-data-store-operations)
+  * [7.1 How to store and access data in QAFE applications](#71-how-to-store-and-access-data-in-qafe-applications)
+  * [7.2 Pipe storage](#72-pipe-storage)
+  * [7.3 User storage](#73-user-storage)
+  * [7.4 Global storage](#74-global-storage)
+
+<!-- toc stop -->
+
+
 ### 7.1 How to store and access data in QAFE applications
 
 In order to be able to use and manipulate data in a QAFE application, it needs to be stored somewhere. There are different ways of storing data, these will be dealt with in this chapter.
