@@ -4,9 +4,15 @@
 
 ### Customize Styling
 
-The default QAFE application uses some styling like the color scheme and background images, which can be customized fully to accomodate your particular layout.
+The default QAFE application uses some styling like the color scheme and background images, which can be customized fully to accomodate your particular layouting needs.
 
-In order to do so the main folders to look for are `src/main/webapp/css` and `src/main/webapp/images` from within your project. The main QAFE css style sheet exists in the css folder and is named `qafe.less`. The file extension `less` exposes its interior format: it's basic CSS combined with more powerful extension provided by `Less` (see http://lesscss.org/).
+The main QAFE CSS style sheet is named `qafe.less`. When building your QAFE project after starting a new QAFE project this file is copied from `${HOME}/qafe/qafe-web-gwt-[x].[y]/css/qafe.less` to `target/[project-name]/css/`. 
+Or to be more general: any file in `${HOME}/qafe/qafe-web-gwt-[x].[y]` is copied to `target/[project-name]`.
+
+The location of `qafe.less` in the Project Explorer of eclipse:
+![qafeless](https://github.com/qafedev/qafedev.github.io/blob/master/assets/images/eclipse-qafe-less.png)
+
+Note that the file extension `less` exposes its interior format: it's basic CSS combined with more powerful extension provided by `Less` (see http://lesscss.org/).
 
 The style sheet `qafe.less` is the starting point for altering the complete look and feel. Though the images can be found in the aforementioned location, they are being referred to in this style sheet.
 
