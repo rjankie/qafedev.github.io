@@ -10,6 +10,7 @@ The main QAFE CSS style sheet is named `qafe.less`. When building your QAFE proj
 Or to be more general: any file in `${HOME}/qafe/qafe-web-gwt-[x].[y]` is copied to `target/[project-name]`.
 
 The location of `qafe.less` in the Project Explorer of eclipse:
+
 ![qafeless](https://github.com/qafedev/qafedev.github.io/blob/master/assets/images/eclipse-qafe-less.png)
 
 Note that the file extension `less` exposes its interior format: it's basic CSS combined with more powerful extension provided by `Less` (see http://lesscss.org/).
