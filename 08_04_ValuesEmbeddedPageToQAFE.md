@@ -22,8 +22,9 @@ At the start-up of the application, a window session ID is generated for unique 
 
 The frame is already loaded up on startup. When the button within the frame is clicked, a request is done to a servlet with the window session ID and the value of the textfield being passed. The window session ID can be retrieved from the DOM of the HTML page. There are two divs within HTML-body containing the application ID and the window session ID. 
 
-Within the servlet, the application context of the QAFE application is retrieved based on the application ID specified in the _application-context.xml_. Based on the window session ID and the application ID, the ID of the application store is created. If a window ID is specified, the value will be stored in the user store, otherwise the global store is used. When clicking on the refresh-button in the QAFE application, the data is filled in the text fields.
+Within the servlet, the application context of the QAFE application is retrieved based on the application ID specified in the _application-config.xml_. Based on the window session ID and the application ID, the ID of the application store is created. If a window ID is specified, the value will be stored in the user store, otherwise the global store is used. When clicking on the refresh-button in the QAFE application, the data is filled in the text fields.
 
+The corresponding application-config.xml is the following:
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <applications xmlns="http://qafe.com/schema"
