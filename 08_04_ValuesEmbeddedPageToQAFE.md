@@ -6,8 +6,11 @@
 *_NOTE: This document is for QAFE developers still using server-side processing in the engine._*
 In QAFE it is possible to embed a webpage in qafe using the _<embed>_-tag. There might be a case, where certain values have to be passed back to QAFE application. This guide will explain how to achieve this.
 
-Take for example the sample application below.
+Take for example this sample application including a refresh-button, a two textfields and a frame. The frame contains a textfield and a button. When the button within the frame is pressed, the value of the textfield within the frame is passed to the QAFE application data store. By pressing the refresh button, the textfields will be filled in based on the value within the frame.
+
 ![jspexample](https://github.com/qafedev/qafedev.github.io/raw/master/assets/images/passing-values-frame-example.png)
+
+The frame is already loaded up on startup.
 
 The corresponding QAML-file is the following:
 ```xml
@@ -52,6 +55,7 @@ The corresponding QAML-file is the following:
 </application-mapping> 
 ```
 
+The code of the frame is the following:
 ```html
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -81,6 +85,7 @@ The corresponding QAML-file is the following:
 </html>
 ```
 
+The servlet code is the following:
 ```java
 package test;
 
