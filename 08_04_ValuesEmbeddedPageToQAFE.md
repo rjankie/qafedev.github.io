@@ -141,7 +141,16 @@ The code of the frame is the following:
 			var windowSessionId = windowSessionIdDiv.getAttribute("value");  
 			var inputField = inputFieldDiv.value;
 			
-			document.location.href="test?&windowSessionId=" + windowSessionId + "&inputField=" + inputField;
+			var url = "test?&windowSessionId=" + windowSessionId + "&inputField=" + inputField;
+			var xmlhttp;
+			xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function(){
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+				    callback(xmlhttp.responseText);
+				}
+			}
+			xmlhttp.open("GET", url, true);
+			xmlhttp.send();			
 		}
 	</script>
 </body>
