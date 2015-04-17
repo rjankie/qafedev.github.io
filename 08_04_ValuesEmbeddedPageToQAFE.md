@@ -4,7 +4,8 @@
 
 ### Passing values from an embedded page to QAFE
 *_NOTE: This document is for QAFE developers still using server-side processing in the engine._*
-In QAFE it is possible to embed a webpage in qafe using the _<embed>_-tag. There might be a case, where certain values have to be passed back to QAFE application. This guide will explain how to achieve this.
+
+In QAFE it is possible to embed a webpage in qafe using the _<embed>_-tag. There might be a case, where certain values have to be passed back to QAFE application. This guide will explain how to achieve this using server-side processing.
 
 Take for example this sample application including a refresh-button, a two textfields and a frame. The frame contains a textfield and a button. When the button within the frame is pressed, the value of the textfield within the frame is passed to the QAFE application data store. By pressing the refresh button, the textfields will be filled in based on the value within the frame.
 
