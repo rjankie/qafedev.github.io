@@ -6,6 +6,10 @@
 *_NOTE: This document is for QAFE developers still using server-side processing in the engine._*
 In QAFE it is possible to embed a webpage in qafe using the _<embed>_-tag. There might be a case, where certain values have to be passed back to QAFE application. This guide will explain how to achieve this.
 
+Take for example the sample application below.
+![jspexample](https://github.com/qafedev/qafedev.github.io/raw/master/assets/images/passing-values-frame-example.png)
+
+The corresponding QAML-file is the following:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <application-mapping xmlns="http://qafe.com/schema"
