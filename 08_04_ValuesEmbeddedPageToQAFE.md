@@ -11,9 +11,40 @@ Take for example this sample application including a refresh-button, a two textf
 
 ![jspexample](https://github.com/qafedev/qafedev.github.io/raw/master/assets/images/passing-values-frame-example.png)
 
+First up, make sure that the following dependencies are available in the pom.xml:
+- javax.servlet.servlet-api (used version 2.3)
+- com.qualogy.qafe.platform.qafe-core (used version 3.3.0)
+- com.qualogy.qafe.platform.qafe-presentation (used version 3.3.0)
+
+The QAFE dependencies can be found on repository.qafe.com and in the WEB-INF/lib-folder of the QAFE Engine.
+
+At the start-up of the application, a window session ID is generated for unique identification of the QAFE application within a page. This session ID and an application ID is available in the DOM of the HTML page. It can be used to access the QAFE application from inside a frame.
+
 The frame is already loaded up on startup. When the button within the frame is clicked, a request is done to a servlet with the window session ID and the value of the textfield being passed. The window session ID can be retrieved from the DOM of the HTML page. There are two divs within HTML-body containing the application ID and the window session ID. 
 
 Within the servlet, the application context of the QAFE application is retrieved based on the application ID specified in the _application-context.xml_. Based on the window session ID and the application ID, the ID of the application store is created. If a window ID is specified, the value will be stored in the user store, otherwise the global store is used. When clicking on the refresh-button in the QAFE application, the data is filled in the text fields.
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<applications xmlns="http://qafe.com/schema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://qafe.com/schema http://www.qafe.com/schema/application-context.xsd">
+
+    <configuration name="external.properties" value="external.properties" />
+    <configuration name="mode.development" value="true" />
+    <configuration name="load.on.startup" value="qafeApp.helloWorld" />
+    <configuration name="mode.mdi" value="false"/>
+
+    <application name="System App" id="system_app">
+        <application-mapping-file location="qafe-default-system-app.xml" />
+    </application>
+
+    <application name="test" id="qafeApp">
+        <application-mapping-file location="test" />
+    </application>
+</applications>
+
+```
 
 The corresponding QAML-file is the following:
 ```xml
@@ -76,12 +107,12 @@ The code of the frame is the following:
 	
 	<script type="text/javascript">
 		function getInputField() {
-			var windowIdDiv = window.parent.document.getElementById('winId');
+			var windowSessionIdDiv = window.parent.document.getElementById('winId');
 			var inputFieldDiv = document.getElementById('inputField');
-			var windowId = windowIdDiv.getAttribute("value");  
+			var windowSessionId = windowSessionIdDiv.getAttribute("value");  
 			var inputField = inputFieldDiv.value;
 			
-			document.location.href="test?&windowSessionId=" + windowId + "&inputField=" + inputField;
+			document.location.href="test?&windowSessionId=" + windowSessionId + "&inputField=" + inputField;
 		}
 	</script>
 </body>
@@ -132,6 +163,7 @@ public class TestServlet extends HttpServlet {
 		
 		ApplicationContext qafe = getApplicationContext();
 		String globalDataStoreId = EventItemExecuteHelper.generateLocalStoreId(windowSessionId, qafe, null);
+		// helloWorld is the window ID specified in the QAML-file
 		String windowDataStoreId = EventItemExecuteHelper.generateLocalStoreId(windowSessionId, qafe, "helloWorld");
 		// Will be stored as a global variable
 		ApplicationLocalStore.getInstance().store(globalDataStoreId, "dummyKey", "dummyValue");
