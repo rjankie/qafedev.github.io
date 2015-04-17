@@ -16,13 +16,41 @@ First up, make sure that the following dependencies are available in the pom.xml
 - com.qualogy.qafe.platform.qafe-core (used version 3.3.0)
 - com.qualogy.qafe.platform.qafe-presentation (used version 3.3.0)
 
-The QAFE dependencies can be found on repository.qafe.com and in the WEB-INF/lib-folder of the QAFE Engine.
+The QAFE dependencies can be found on repository.qafe.com and in the WEB-INF/lib-folder of the QAFE Engine. Also make sure that the servlet using the servlet API and the corresponding servlet mapping is added to the web.xml.
 
 At the start-up of the application, a window session ID is generated for unique identification of the QAFE application within a page. This session ID and an application ID is available in the DOM of the HTML page. It can be used to access the QAFE application from inside a frame.
 
 The frame is already loaded up on startup. When the button within the frame is clicked, a request is done to a servlet with the window session ID and the value of the textfield being passed. The window session ID can be retrieved from the DOM of the HTML page. There are two divs within HTML-body containing the application ID and the window session ID. 
 
 Within the servlet, the application context of the QAFE application is retrieved based on the application ID specified in the _application-config.xml_. Based on the window session ID and the application ID, the ID of the application store is created. If a window ID is specified, the value will be stored in the user store, otherwise the global store is used. When clicking on the refresh-button in the QAFE application, the data is filled in the text fields.
+
+These dependencies have to be added to the pom.xml:
+```xml
+<dependencies>
+	<!-- Dependency is needed for the servlet to work properly -->
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>servlet-api</artifactId>
+		<version>2.3</version>
+		<scope>provided</scope>
+	</dependency>
+
+	<!-- Both dependencies are needed for storing the data in Application Store -->
+	<dependency>
+		<groupId>com.qualogy.qafe.platform</groupId>
+		<artifactId>qafe-core</artifactId>
+		<version>3.3.0</version>
+		<scope>provided</scope>
+	</dependency>
+
+	<dependency>
+		<groupId>com.qualogy.qafe.platform</groupId>
+		<artifactId>qafe-presentation</artifactId>
+		<version>3.3.0</version>
+		<scope>provided</scope>
+	</dependency>
+</dependencies>
+```
 
 The corresponding application-config.xml is the following:
 ```xml
