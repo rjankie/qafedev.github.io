@@ -63,7 +63,7 @@ QAML-file with Log built-in:
 ```
 
 CSS class used by default for styling the Log message
-```
+```css
 .qmessagebox {
   width: 200px;
   height: 20px;
@@ -82,7 +82,7 @@ CSS class used by default for styling the Log message
 If you want to change the style of all the Log messages shown in the application, you can overwrite these classes with your style.
 Add this entry in your custom css file or qafe.less file to show message with grey color instead of the default yellow color.
 
-```
+```css
 .qmessagebox {
   width: 200px;
   height: 50px;
@@ -98,14 +98,14 @@ Add this entry in your custom css file or qafe.less file to show message with gr
 To change style on a particular Log action, you can use the style or class attribute of the log built-in.
 
 Example code using custom style class myLogStyleClass:
-```
+```xml
 <log delay="4000" class="myLogStyleClass" >
 	<message value="Hi ${x}"></message>
 </log>
 ```
 
 Example code using inline style:
-```
+```xml
 <log delay="4000" style="height: 50px; background-color: grey;" >
 	<message value="Hi ${x}"></message>
 </log>
