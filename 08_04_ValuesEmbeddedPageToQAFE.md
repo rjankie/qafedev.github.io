@@ -18,7 +18,9 @@ First up, make sure that the following dependencies are available in the pom.xml
 
 The QAFE dependencies can be found on repository.qafe.com and in the WEB-INF/lib-folder of the QAFE Engine. Also make sure that the servlet using the servlet API and the corresponding servlet mapping is added to the web.xml.
 
-At the start-up of the application, a window session ID is generated for unique identification of the QAFE application within a page. This session ID and an application ID is available in the DOM of the HTML page. It can be used to access the QAFE application from inside a frame.
+![jspflow](https://github.com/qafedev/qafedev.github.io/raw/master/assets/images/Application store flow.png)
+
+The image above describes the basic flow for passing values from a JSP page to the QAFE application. At the start-up of the application, a window session ID is generated for unique identification of the QAFE application within a page. This session ID and an application ID is available in the DOM of the HTML page. It can be used to access the QAFE application from inside a frame.
 
 The frame is already loaded up on startup. When the button within the frame is clicked, a request is done to a servlet with the window session ID and the value of the textfield being passed. The window session ID can be retrieved from the DOM of the HTML page. There are two divs within HTML-body containing the application ID and the window session ID. 
 
