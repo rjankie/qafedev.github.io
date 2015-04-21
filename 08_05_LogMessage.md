@@ -79,8 +79,8 @@ CSS class used by default for styling the Log message
 }
 ```
 
-If you want to change the style of all the Log messages shown in the application, you can overwrite these classes with your style.
-Add this entry in your custom css file or qafe.less file to show message with grey color instead of the default yellow color.
+To change the style of all the Log messages shown in the application, you can overwrite these classes with your style.
+Add this qmessagebox class in your custom css file or qafe.less file to show message with grey color instead of the default yellow color.
 
 ```css
 .qmessagebox {
