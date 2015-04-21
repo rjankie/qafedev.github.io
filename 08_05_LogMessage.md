@@ -100,7 +100,7 @@ To change style on a particular Log action, you can use the style or class attri
 Example code using custom style class myLogStyleClass:
 ```xml
 <log delay="4000" class="myLogStyleClass" >
-	<message value="message to show}"></message>
+	<message value="message to show"></message>
 </log>
 ```
 
