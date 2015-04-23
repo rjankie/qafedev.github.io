@@ -48,10 +48,15 @@ To import data, have a CSV file ready to be imported. Note that the datagrid com
 An example of a valid CSV would be:
 
 ID;NAME
+
 10;apple
+
 11;pear
+
 12;orange
+
 13;banana
+
 14;pineapple
 
 The delimiter is configurable during runtime of the QAFE application.
