@@ -42,9 +42,6 @@ On the datagrid we see a multitude of attributes where the following two are use
 The code above will result in the following output:
 ![datagrid](https://raw.githubusercontent.com/qafedev/qafedev.github.io/master/assets/images/QAFE-1202.png)
 
-
-For the sake of simplicity, it is assumed data is available in the datagrid.
-
 ### Importing data
 To import data, have a CSV file ready to be imported. Note that the datagrid component tries to match headers in the CSV to the name attribute in the column definition, so they should be the same.
 
