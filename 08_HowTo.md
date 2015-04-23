@@ -10,3 +10,4 @@ This page contains guides on how to tackle certain problems within QAFE.
 * [Utilizing the full browser screen for each panel](08_03_UtilizingBrowserScreen.md)
 * [Passing values from an embedded page to QAFE](08_04_ValuesEmbeddedPageToQAFE.md)
 * [Show Temporary Messages to User](08_05_LogMessage.md)
+* [Importing data to a datagrid](08_06_DataGridImport.md)
