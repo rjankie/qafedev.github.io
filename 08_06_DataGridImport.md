@@ -39,6 +39,9 @@ On the datagrid we see a multitude of attributes where the following two are use
 	</presentation-tier>
 </application-mapping> 
 ```
+The code above will result in the following output:
+![datagrid](https://raw.githubusercontent.com/qafedev/qafedev.github.io/master/assets/images/QAFE-1202.png)
+
 
 For the sake of simplicity, it is assumed data is available in the datagrid.
 
