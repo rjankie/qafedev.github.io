@@ -13,9 +13,9 @@ As seen in the example below, we have a button and a datagrid with 2 columns def
 On the datagrid we see a multitude of attributes where the following two are used to determine import behaviour. 
 
 * import - allow importing of data into the datagrid
-*	* possible values are "true" and "false". The default value is "false"
+  * possible values are "true" and "false". The default value is "false"
 * import-action - specifies if the imported data needs to replace existing data, or be appended.
-*	* possible values are "set" and "add". The default value for this attribute is "set".
+  * possible values are "set" and "add". The default value for this attribute is "set".
 
 
 ```xml
