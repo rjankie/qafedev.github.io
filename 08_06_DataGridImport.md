@@ -34,9 +34,6 @@ On the datagrid we see a multitude of attributes where the following two are use
 					    </datagrid>
 					</verticallayout>
 				</rootpanel>
-				<events>	
-					
-				</events>
 			</window>
 		</view>
 	</presentation-tier>
