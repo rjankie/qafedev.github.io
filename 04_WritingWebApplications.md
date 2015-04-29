@@ -14,7 +14,7 @@
   * [Styling](#styling)
   * [Business Actions](#business-actions)
   * [Services](#services)
-  * [4.7. ResourceTier](#47-resourcetier)
+  * [ResourceTier](#resourcetier)
     * [Database](#database)
     * [drivermanager-datasource resource.](#drivermanager-datasource-resource)
     * [jndi-datasource resource.](#jndi-datasource-resource)
@@ -25,7 +25,7 @@
   * [Java](#java)
     * [javaclass resource.](#javaclass-resource)
     * [spring resource.](#spring-resource)
-  * [4.8. Adapters](#48-adapters)
+  * [Adapters](#adapters)
   * [Transactions](#transactions)
   * [Exceptions](#exceptions)
 
@@ -678,16 +678,19 @@ Following are the attributes of `<store-clear>`
 
 #####  Other Builtins
 
-######  `<authenticate>`
+######  `<call-script>`
 
-The `<authenticate>` tag is used to authorize log ins. The reference to the business action which takes care of the authentication process is mentioned as the ``ref`` attribute of the tag. The username and password are passed as parameters to the referenced business action. The `<username>` and the `<password>` tag can have attributes same as the `<in>` tags used in `<business-action>`
+The [`<call-script>`][call-script] tag is used to call script functions available to your web-application. This tag accepts two attributes the `function` and the `type`. The former is required the latter is not. The `type` attributed indentifies what language the script is in, currently the only supported language is JavaScript. JavaScript is also the default when the `type` attribute is ommited. The `function` attribute identifies the function to be called. If the function accepts parameters, these can be specified using [`<param>`][param] child elements. These elements accept, among others, a `type` and a `value` attribute. Of both the value is a string. The string value of the `type` attribute must be one of: `integer`, `int`, `long`, `double`, `character`, `char`, `boolean` and `string`.
 
 ```XML
-<authenticate business-action-ref="authenticationBusinessAction">
-	<username ref="userNameComponentId"/>
-	<password ref="myPasswordComponentId"/>
-</authenticate>
+<call-script type="javascript" function="myJavaScriptFunction">
+	<param type="string" value="Hello World!"/>
+	<param type="integer" value="42"/>
+</call-script>
 ```
+
+[call-script]: http://www.qafe.com/static/documentation/api/application-context_files/schemas/application-mapping_xsd/elements/call-script.html "call-script"
+[param]: http://www.qafe.com/static/documentation/api/application-context_files/schemas/application-mapping_xsd/elements/param.html "param"
 
 ######  `<clear>`
 
@@ -772,19 +775,13 @@ This tag is used as an exception handler. Services which are expected to cause e
 	</service>
 </error-handler>
 ```
+
 ######  `<focus>`
 
  This tag is used to set cursor focus on a particular component
 ```XML
 <focus ref="myComponentId"/>
 ````
-######  `<logout>`
-
-The logout tag is used to sign out from the current authenticated session. The ``confirmation-required`` attribute can have true or false value. A true value as for confirmation before logging out. Usage is as follows.
-
-```XML
-<logout confirmation-required="true"/>
-```
 
 ######  `<openwindow>`
 
