@@ -381,7 +381,7 @@ An additional file *jetty-env.xml* needs to be added to the src/main/WEB-INF-fol
 This configuration will work for Jetty 6. Jetty 7 and later uses different classes where *org.mortbay.jetty* has been changed into *org.eclipse.jetty*.
 
 ### Tomcat
-To get JNDI working in Tomcat, two changes have to be made. First up the context.xml of Tomcat in the conf-folder should be modified. A resource has to be added like in the example below.
+To get JNDI working in Tomcat, a few changes have to be made. First, make sure that the JDBC driver found in the QAFE Engine (ojdbc5.jar) is available in Tomcat's *lib*-folder. Next up the context.xml of Tomcat in the *conf*-folder should be modified. A resource has to be added like in the example below.
 ```XML
 <Resource name="jdbc/oracleQAFE" auth="Container"
 		  type="javax.sql.DataSource" driverClassName="oracle.jdbc.OracleDriver"
