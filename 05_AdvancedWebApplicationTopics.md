@@ -380,28 +380,28 @@ An additional file *jetty-env.xml* needs to be added to the src/main/WEB-INF-fol
 
 This configuration will work for Jetty 6. Jetty 7 and later uses different classes where *org.mortbay.jetty* has been changed into *org.eclipse.jetty*.
 
-
-
-
 ### Tomcat
+To get JNDI working in Tomcat, two changes have to be made. First up the context.xml of Tomcat in the conf-folder should be modified. A resource has to be added like in the example below.
+```XML
+<Resource name="jdbc/oracleQAFE" auth="Container"
+		  type="javax.sql.DataSource" driverClassName="oracle.jdbc.OracleDriver"
+		  url="jdbc:oracle:thin:@localhost:1521:XE"
+		  username="hdemo65" password="hdemo65" maxActive="20" maxIdle="10" accessToUnderlyingConnectionAllowed="true"
+		  maxWait="-1"/>
+```
 
-1-    Open the following file under tomcat location: 
+Additionally the web.xml needs to be modified by adding a resource-ref as seen in the example below.
+ 
+```XML		 
+<resource-ref>
+	<description>QAFE Oracle Data Source</description>
+	<res-ref-name>jdbc/oracleQAFE</res-ref-name>
+	<res-type>javax.sql.DataSource</res-type>
+	<res-auth>Container</res-auth>
+</resource-ref>
+```
 
-`$CATALINA_BASE/conf/context.xml`
-
-2-    Add the following part between the conext element :
-
-![image alt text](assets/images/image_11_2.png)
-
-3-    Add the following element to the web.xml of you web application:
-
-![image alt text](assets/images/image_11_3.png)
-
-4-    Now you can refer to your created datasource in your qafe application.
-
-5-    You done!
-
- 
+For more details on how to properly use JNDI in Tomcat, please contact the [JNDI page](https://tomcat.apache.org/tomcat-7.0-doc/jndi-datasource-examples-howto.html "Tomcat website") on the Tomcat website.
 
 ## Search operators usage
 
