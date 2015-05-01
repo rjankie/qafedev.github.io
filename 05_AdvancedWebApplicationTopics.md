@@ -325,7 +325,7 @@ Note: the user name used in datasource to connect to database could be different
 
 ## JNDI Configuration
 
-See the page [JNDI Configuration](08_04_JNDI_Configuration.md "JNDI Configuration") for details.
+See the page [JNDI Configuration](05_04_JNDI_Configuration.md "JNDI Configuration") for details.
 
 ## Search operators usage
 
