@@ -84,7 +84,7 @@ Additionally the web.xml needs to be modified by adding a resource-ref as seen i
 </resource-ref>
 ```
 
-Finally a small change needs to be done to the resource-tier. The JNDI name of the resource needs to be prefixed with *java:/comp/env/*, so for example *java:/comp/env/jdbc/oracleQAFE*
+Finally a small change needs to be done to the resource-tier. The JNDI name of the resource needs to be prefixed with *java:/comp/env/*, so for example *java:/comp/env/jdbc/oracleQAFE*.
 
 For more details on how to properly use JNDI in Tomcat, please contact the [JNDI page](https://tomcat.apache.org/tomcat-7.0-doc/jndi-datasource-examples-howto.html "Tomcat website") on the Tomcat website.
 
