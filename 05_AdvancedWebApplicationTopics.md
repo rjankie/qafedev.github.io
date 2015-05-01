@@ -327,54 +327,61 @@ Note: the user name used in datasource to connect to database could be different
 
 ##  JNDI
 
- 
+### Resource Tier
+Before using JNDI in the QAFE application, the JNDI connection has to be specified in the resource-tier. When using a database resource directly, the resource-tier contains a drivermanager-datasource as seen in the example below.
+
+```XML
+<resource-tier>
+	<resources>
+		<drivermanager-datasource id="ModuleDataBaseService"
+		statements-file-url="hsd0004f.fmb-statements.xml"
+		url="jdbc:oracle:thin:@localhost:1521:XE"
+		username="hdemo65"
+		password="hdemo65"
+		driver-classname="oracle.jdbc.OracleDriver"/>
+	</resources>
+</resource-tier>
+```
+
+
+The drivermanager-datasource has to be replaced with a jndi-datasource. By using JNDI the database connection looks like this:
+
+```XML
+<resource-tier>
+	<resources>
+		<jndi-datasource id="ModuleDataBaseService"
+		statements-file-url="hsd0004f.fmb-statements.xml"
+		jndiname="jdbc/oracleQAFE"/>
+	</resources>
+</resource-tier>
+```
+
 
 ### Jetty
-
-1.    Pick up "qafe-web-gwt.war" file.
-2.    Go to` /WEB-INF` directory.
-3.    Open "`jetty-web.xml`" file.
-4.    You can change the JNDI name and database properties in this file.
-5.    Save the file if you are finished with changes.
-6.    You done!!!
-
- 
-
-Remember you have to use "jndi-datasource" element in your QAFE application’s resourse-tier.
-
- 
-
-Before using JNDI in your QAFE application you can specify the database connection like this:
-
- 
-```XML
-  <resource-tier>
-    <resources>
-      <drivermanager-datasource id="ModuleDataBaseService"
-            statements-file-url="hsd0004f.fmb-statements.xml"
-            url="jdbc:oracle:thin:@192.168.130.205:1521:XE"
-            username="hdemo65"
-            password="hdemo65"
-            driver-classname="oracle.jdbc.OracleDriver"/>
-    </resources>
-  </resource-tier>
-```
- 
-
-By using JNDI your database connection looks like this:
+An additional file *jetty-env.xml* needs to be added to the src/main/WEB-INF-folder of the project. Jetty will pick this file up automatically. This file should contain the DB connections as described below.
 
 ```XML
-  <resource-tier>`
-
-    <resources>`
-
-      <jndi-datasource id="ModuleDataBaseService"
-        statements-file-url="hsd0004f.fmb-statements.xml"
-        jndiname="jdbc/oracleQAFE"/>
-    </resources>
-  </resource-tier>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+<Configure class="org.mortbay.jetty.webapp.WebAppContext">
+	<New id="oracleQAFE" class="org.mortbay.jetty.plus.naming.Resource">
+		<Arg></Arg>
+		<Arg>jdbc/oracleQAFE</Arg>
+		<Arg>
+			<New class="oracle.jdbc.pool.OracleDataSource">
+				<Set name="URL">jdbc:oracle:thin:@localhost:1521:XE</Set>
+				<Set name="User">hdemo65</Set>
+				<Set name="Password">hdemo65</Set>
+			</New>
+		</Arg>
+	</New>
+</Configure>
 ```
- 
+
+This configuration will work for Jetty 6. Jetty 7 and later uses different classes where *org.mortbay.jetty* has been changed into *org.eclipse.jetty*.
+
+
+
 
 ### Tomcat
 
