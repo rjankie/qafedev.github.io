@@ -325,7 +325,7 @@ Note: the user name used in datasource to connect to database could be different
 
  
 
-##  JNDI
+## JNDI
 
 ### Resource Tier
 Before using JNDI in the QAFE application, the JNDI connection has to be specified in the resource-tier. When using a database resource directly, the resource-tier contains a drivermanager-datasource as seen in the example below.
@@ -402,6 +402,9 @@ Additionally the web.xml needs to be modified by adding a resource-ref as seen i
 ```
 
 For more details on how to properly use JNDI in Tomcat, please contact the [JNDI page](https://tomcat.apache.org/tomcat-7.0-doc/jndi-datasource-examples-howto.html "Tomcat website") on the Tomcat website.
+
+### Weblogic
+To get JNDI working on Weblogic, data sources have to be created on the Weblogic server. When logged in on the server, open the Data source page under services. Create a new data source by clicking on the new-button and following the wizard. Make sure that *oracle.jdbc.pool.OracleDataSource* is used as driver class name. The data source should be connected to the correct cluster. Add the correct cluster as a target.
 
 ## Search operators usage
 
