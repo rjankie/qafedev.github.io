@@ -1,5 +1,15 @@
 # JNDI Configuration
 When an application is deployed on multiple machines using other databases, it is useful to let the system decide which database to use. JNDI is introduced to handle that section. This page will describe how to set up a QAFE application for this and how to configure Jetty, Tomcat and Weblogic for a proper application.
+
+<!-- toc -->
+
+* [Resource Tier](#resource-tier)
+* [Jetty](#jetty)
+* [Tomcat](#tomcat)
+* [Weblogic](#weblogic)
+
+<!-- toc stop -->
+
 ## Resource Tier
 Before using JNDI in the QAFE application, the JNDI connection has to be specified in the resource-tier. When using a database resource directly, the resource-tier contains a drivermanager-datasource as seen in the example below.
 
