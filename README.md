@@ -8,6 +8,7 @@
 * [QAFE One Click Application](06_QafeOneClickApplication.md)
 * [Data store operations](07_DataStoreOperations.md)
 * [How-To Guides](08_HowTo.md)
+* [Components](09_Components.md)
 
 #### Free training material
 
