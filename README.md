@@ -9,6 +9,7 @@
 * [Data store operations](07_DataStoreOperations.md)
 * [How-To Guides](08_HowTo.md)
 * [Components](09_Components.md)
+* [Troubleshooting](10_Troubleshooting.md)
 
 #### Free training material
 
