@@ -13,7 +13,7 @@
   * [Parameters passing](#parameters-passing)
 * [QAFE advanced configuration](#qafe-advanced-configuration)
 * [Accessing Businessactions using webservice](#accessing-businessactions-using-webservice)
-* [VPD usage in QFE application](#vpd-usage-in-qfe-application)
+* [VPD usage in QAFE application](#vpd-usage-in-qfe-application)
 * [JNDI Configuration](#jndi-configuration)
 * [Search operators usage](#search-operators-usage)
 
